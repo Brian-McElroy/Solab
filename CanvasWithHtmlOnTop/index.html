@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="style.css" />
+
+<h3>Positioning interactive HTML elements on top of a canvas</h3>
+Finally we can combine everything we learnt about relative and absolute elements to understand how to position HTML elements on top of a canvas.<br>
+This is not straightforward because the canvas itself cannot have children.<br>
+(Anything inside a canvas tag is only used as alternative content if the canvas cannot be shown)<br>
+<br>
+We aim to put the canvas in a normal flow where it has grey boxes before and after<br>
+The red box is actually a canvas<br>
+And the blue boxes are HTML elements we put on top of the canvas to create accessible interactive areas. <br>
+<br>
+<div class="greyBox">1</div>
+<div class="relativeParent" id="2">
+      <canvas id="2.1"></canvas>
+      <div class="blueBorderBoxA">2.2</div>
+      <div class="blueBorderBoxB">2.3</div>
+      <div class="blueBorderBoxC">2.4</div>
+</div>
+<div class="greyBox">3</div>
+<div class="greyBox">4</div>
+<br>
+Here's how it works
+  <ul>
+    <li> Between grey box 1 and grey box 3 is an element with the class 'relativeParent'</li>
+    <ul>
+      <li> This element has the <i>position:relative</i> property, but no offset with <i>top, left</i> and no <i>width</i> or <i>height</i> set</li>
+      <li> It takes its size from any internal content that also reserves space (in this case the canvas)</li>
+      <li> It in turn reserves this space in its own flow, therefore pushing down the next grey box</li>
+    </ul>
+    <li> The canvas itself has a fixed size (set in its class in this case)</li>
+    <ul>
+      <li> This canvas does <b>not</b> have a <i>position</i> property set</li>
+      <li> meaning in uses the default <i>position:static</i> behaviour (not absolute or relative)</li>
+      <li> Because it's the first content in the parent it starts drawing from the parents anchor point</li>
+      <li> In terms of space in the layout it reserves space in its flow as normal</li>
+      <li> Which means it's reserving space in its parent</li>
+      <li> And then the (relative) parent is reserving space in the original flow with the grey boxes</li>
+    </ul>
+    <li>The blue boxes are <b>siblings</b> of the canvas</li>
+    <ul>
+      <li> Which means they share the same parent as the canvas, the parent that has <i>position:relative</i></li>
+      <li> The blue boxes all have <i>position:absolute</i> set and <i>top, left</i> offsets</li>
+      <li> They use the parent with <i>position:relative</i> as an anchor </li>
+      <li> Which effectively means they are offset from the <b>same</b> anchor point the canvas uses to start drawing from </li>
+      <li><i>Absolute</i> positioning also means they don't reserve space in any flow, so they don't cause any unwanted push down of grey boxes in the flow </li>
+    </ul>
+  </ul>
+</div> 
+<hr>
+This is the last part of a tutorial series on understanding normal flow, relative and absolute positioning. <br> 
+<br>
+<a href="https://codepen.io/collection/yrmwoO" target="_blank" rel="noopener noreferrer">Go to the tutorial collection on code pen</a><br>
+<a href="https://github.com/cables-gl/cables_docs/discussions/879" target="_blank" rel="noopener noreferrer">Go to the original tutorial post on github</a><br>

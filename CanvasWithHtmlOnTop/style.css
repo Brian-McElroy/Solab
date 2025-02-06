@@ -1,0 +1,55 @@
+.greyBox {
+  background-color:#555;
+  height:2em;
+  width:4em;
+  margin:2px;
+  
+  color:white; /* text color */
+}
+
+.relativeParent {  
+  position:relative;
+  
+}
+
+canvas {
+            width: 200px;
+            height: 100px;
+            background-color: #99000080;
+}
+
+.blueBorderBoxA {
+  color:white; /* text color */
+  box-sizing: border-box;
+  border: thick solid #32a1ce; 
+  height:2em;
+  width:2em;
+  
+  position:absolute;
+  top:30px;
+  left:50px;
+}
+
+.blueBorderBoxB {
+  color:white; /* text color */
+  box-sizing: border-box;
+  border: thick solid #32a1ce; 
+  height:2em;
+  width:2em;
+  
+  position:absolute;
+  top:10px;
+  left:136px;
+}
+
+.blueBorderBoxC {
+  color:white; /* text color */
+  box-sizing: border-box;
+  border: thick solid #32a1ce; 
+  height:2em;
+  width:2em;
+  
+  position:absolute;
+  top:60px;
+  left:90px;
+}

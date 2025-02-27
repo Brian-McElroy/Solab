@@ -1,0 +1,28 @@
+html, body
+{
+   background-color: lime;
+   overflow: hidden;
+   position: fixed;
+   padding: 0;
+   margin: 0;
+   height: 100%;
+   width: 100%;
+}
+
+#topdiv
+{
+  padding: 0;
+  margin: 0;
+  background-color: blue;
+  height: 10%;
+  width: 100%;
+} 
+
+#reddiv
+{
+  padding: 0;
+  margin: 0;
+  background-color: red;
+  height: 80%;
+  width: 100%;
+} 

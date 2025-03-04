@@ -10,13 +10,15 @@ function RegisterOnServer(url)
   req.location = JSON.parse(localStorage.getItem(LocationKey));
   req.name = getArtistName(req.trackurl);
 
-  $.get(
-    ServerUrl+"/AcceptInvite",
-    req,
-    function(data){
-      alert(data);
-    }
-  ); 
+  $.get(ServerUrl+"/AcceptInvite",req)
+  .done(function(data)
+   {
+      {alert("success: " +data);}
+    })
+    .fail(function(jqXHR)
+    {
+        {alert("fail: " +jqXHR.responseText);}
+    });
 }
 
 function getArtistName(url) {

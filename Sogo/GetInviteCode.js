@@ -1,4 +1,3 @@
-
 function OkPressed()
 {
     let location = [0.51094,0.59092];

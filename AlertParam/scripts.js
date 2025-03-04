@@ -1,10 +1,10 @@
 
 const artistidKey ="artistID"
 
-function getArtistIDParam()
+function WelcomeSetup()
 {
     const params = new URLSearchParams(window.location.search);
-    let artistid = params.get(artistidKey);
+    let artistid = params.get(inviteCodeKey);
 
     if(artistid == null)
     {
@@ -12,15 +12,15 @@ function getArtistIDParam()
         return;
     }
 
-    localStorage.setItem(artistidKey, artistid);
+    localStorage.setItem(inviteCodeKey, artistid);
     alert(artistid);
 }
 
-getArtistIDParam();
+WelcomeSetup();
 
 function AlertIDCookie()
 {
-    alert(localStorage.getItem(artistidKey));  
+    alert(localStorage.getItem(inviteCodeKey));  
 }
 
 

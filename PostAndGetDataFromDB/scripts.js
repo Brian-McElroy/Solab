@@ -25,14 +25,14 @@ function SendDataPressed()
     );
 }
 
-function getArtistIDParam()
+function WelcomeSetup()
 {
     const params = new URLSearchParams(window.location.search);
     let artistid = params.get("artistId");
     alert(artistid);
 }
 
-getArtistIDParam();
+WelcomeSetup();
 
 
 document.getElementById("GetDBDataButton").onclick = GetDataPressed;

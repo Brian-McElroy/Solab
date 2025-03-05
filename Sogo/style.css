@@ -8,8 +8,11 @@ html, body
    width: 100%;
    font-size:3vh;
    text-align: center;
-   /*background-image: url("bg.jpg");
-   background-size: auto;*/
+   background-image: url("./BGPattern.svg");
+   background-size: cover; /* or contain */
+   background-repeat: no-repeat;
+   background-position: center;
+   background-color: lightgray; /* Just for testing */
 }
 
 p

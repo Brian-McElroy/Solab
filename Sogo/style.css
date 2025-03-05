@@ -30,3 +30,8 @@ html, body
   height: 80%;
   width: 100%;
 } 
+
+.selectedgenreButton
+{
+  color: yellow;
+}

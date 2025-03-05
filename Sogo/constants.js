@@ -8,6 +8,7 @@ const LocationKey ="location"
 const MyNameKey ="myname"
 const MyIDKey ="MyID"
 const MyInviteKey ="MyInvite"
+const MyGenresKey ="mygenres"
 
 function CheckCode(invitecode)
 {

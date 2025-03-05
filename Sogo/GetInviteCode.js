@@ -1,6 +1,9 @@
 
 
 let gotInviteCode = false;
+let MyInviteCode;
+let MyID;
+let MyName;
 
 function RegisterOnServer(url)
 {
@@ -9,16 +12,35 @@ function RegisterOnServer(url)
   req.trackurl = localStorage.getItem(TrackUrlKey);
   req.location = JSON.parse(localStorage.getItem(LocationKey));
   req.name = getArtistName(req.trackurl);
+  MyName = req.name;
 
   $.get(ServerUrl+"/AcceptInvite",req)
   .done(function(data)
    {
-      {alert("success: " +data);}
+      HandleRegistrySuccess(data);
     })
     .fail(function(jqXHR)
     {
-        {alert("fail: " +jqXHR.responseText);}
+        document.getElementById('error').innerHTML ="Something went wrong. " +jqXHR.responseText;
     });
+}
+
+function HandleRegistrySuccess(data)
+{
+    alert(JSON.stringify(data));
+
+    MyID = data.id;
+    MyInviteCode = data.invite;
+    localStorage.setItem(MyIDKey,MyID);
+    localStorage.setItem(MyInviteKey,MyInviteCode);
+    localStorage.setItem(MyNameKey,MyName);
+    document.getElementById('OkButton').innerHTML = GetInviteUrl();
+    gotInviteCode = true;
+}
+
+function GetInviteUrl()
+{
+    return SiteUrl+"?invite="+ MyInviteCode+"&name="+MyName;
 }
 
 function getArtistName(url) {
@@ -28,7 +50,9 @@ function getArtistName(url) {
 
 function OkPressed()
 {
-    RegisterOnServer();
+    if(!gotInviteCode) return;
+    navigator.clipboard.writeText(GetInviteUrl());
+    window.location = "index.html"
 }
 
 document.getElementById("OkButton").onclick = OkPressed;

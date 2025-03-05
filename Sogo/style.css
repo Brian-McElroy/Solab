@@ -6,6 +6,38 @@ html, body
    margin: 0;
    height: 100%;
    width: 100%;
+   font-size:3vh;
+   text-align: center;
+   /*background-image: url("bg.jpg");
+   background-size: auto;*/
+}
+
+p
+{
+    margin: 10vh 2vh;
+}
+
+button
+{
+  font-size: 4vh;
+  text-align: center;
+  max-width:80%;
+}
+
+input 
+{
+  width: 80%;
+  font-size: 2vh;
+  text-align: center;
+  outline-style: solid;
+}
+
+#OkButton
+{
+  position: absolute;
+  bottom: 4vh;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 #error

@@ -27,8 +27,6 @@ function RegisterOnServer(url)
 
 function HandleRegistrySuccess(data)
 {
-    alert(JSON.stringify(data));
-
     MyID = data.id;
     MyInviteCode = data.invite;
     localStorage.setItem(MyIDKey,MyID);

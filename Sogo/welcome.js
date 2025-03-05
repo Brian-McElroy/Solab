@@ -6,18 +6,11 @@ function WelcomeSetup()
   let invitecode = params.get(inviteCodeKey);
   let name = params.get(nameKey);
 
-  codeok = CheckInviteCode(invitecode);
+  codeok = CheckCode(invitecode);
 
   if(codeok) localStorage.setItem(inviteCodeKey, invitecode);
 
   SetNameInWelcomeMsg(name);
-}
-
-function CheckInviteCode(invitecode)
-{
-  if(invitecode == null) return false;
-  if(invitecode.length < 5) return false;
-  return true;
 }
 
 function SetNameInWelcomeMsg(name)

@@ -8,3 +8,10 @@ const LocationKey ="location"
 const MyNameKey ="myname"
 const MyIDKey ="MyID"
 const MyInviteKey ="MyInvite"
+
+function CheckCode(invitecode)
+{
+  if(invitecode == null) return false;
+  if(invitecode.length != 32) return false;
+  return true;
+}

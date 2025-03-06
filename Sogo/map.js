@@ -16,4 +16,3 @@ function RetrieveID()
 
 
 RetrieveID();
-alert(myid);

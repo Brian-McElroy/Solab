@@ -57,11 +57,10 @@ input
   width: 100%;
 } 
 
-#reddiv
+#map
 {
   padding: 0;
   margin: 0;
-  background-color:blueviolet;
   height: 80%;
   width: 100%;
 } 

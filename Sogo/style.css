@@ -48,21 +48,25 @@ input
   color: red;
 }
 
-#topdiv
-{
-  padding: 0;
-  margin: 0;
-  background-color: blue;
-  height: 10%;
-  width: 100%;
-} 
-
 #map
 {
+  position: absolute;
+  top: 10%;
   padding: 0;
   margin: 0;
   height: 80%;
   width: 100%;
+} 
+
+#testicon
+{
+  position: absolute;
+  height: 5vh;
+  width: 5vh;
+  top: 100% ;   /* Move down 50px */
+  left: 100%; /* Move right 100px */
+  background-color: red;
+  transform: translate(-50%, -50%);
 } 
 
 .selectedgenreButton

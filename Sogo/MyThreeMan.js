@@ -1,4 +1,8 @@
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+let icon = document.getElementById("testicon");
+let debugtxt = document.getElementById("debugtxt");
 
 // Select the div with id "map"
 const container = document.getElementById('map');
@@ -6,48 +10,112 @@ const container = document.getElementById('map');
 // Set up scene, camera, and renderer
 const scene = new THREE.Scene();
 //scene.background = new THREE.Color( 0xff0000 );
-const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
 
+
+//const width = container.clientWidth *scale;
+//const height = container.clientHeight *scale;
+//const camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 1, 1000 );
+//scene.add( camera );
+//const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+
+
+const width = container.clientWidth;
+const height = container.clientHeight;
+
+// Orthographic Camera Setup
+const aspect = width / height;
+const frustumSize = 6; // Adjust this if needed
+const camera = new THREE.OrthographicCamera(
+    -frustumSize * aspect / 2,  // left
+        frustumSize * aspect / 2,  // right
+        frustumSize / 2,           // top
+    -frustumSize / 2,           // bottom
+        0.1, 10                    // near, far
+);
+camera.position.z = 10; // Position the camera
+
+// Renderer
 const renderer = new THREE.WebGLRenderer({ alpha: true });
+renderer.setSize(width, height);
+renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setClearColor( 0xffffff, 0);
-renderer.setSize(container.clientWidth, container.clientHeight);
 container.appendChild(renderer.domElement);
 
-// Create a cube
-const geometry = new THREE.BoxGeometry(3, 3, 3);
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-const cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
 
-//create a blue LineBasicMaterial
 const linematerial = new THREE.LineBasicMaterial( { color: 0x0000ff } );
-const points = [];
-points.push( new THREE.Vector3( - 10, 0, 0 ) );
-points.push( new THREE.Vector3( 0, 10, 0 ) );
-points.push( new THREE.Vector3( 10, 0, 0 ) );
-const linegeometry = new THREE.BufferGeometry().setFromPoints( points );
-const line = new THREE.Line( linegeometry, linematerial );
-scene.add( line );
+const pointstwo = [];
+pointstwo.push( new THREE.Vector3( 0, -20, 0 ) );
+pointstwo.push( new THREE.Vector3( 0, 20, 0 ) );
+pointstwo.push( new THREE.Vector3( 20, 0, 0 ) );
+pointstwo.push( new THREE.Vector3( -20, 0, 0 ) );
+const linegeometrytwo = new THREE.BufferGeometry().setFromPoints( pointstwo );
+const linetwo = new THREE.Line( linegeometrytwo, linematerial );
+scene.add( linetwo );
 
-// Position the camera
-camera.position.z = 10;
 
 // Animation loop
 function animate() {
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
+    //RotateCube();
+    iconFollowPoint();
     renderer.render(scene, camera);
+    camera.translateX( 0.005 );
 }
 renderer.setAnimationLoop(animate);
 
-// Handle window resizing
-window.addEventListener('resize', () => {
-    camera.aspect = container.clientWidth / container.clientHeight;
+// Resize Handler
+function onResize() {
+    const newWidth = container.clientWidth;
+    const newHeight = container.clientHeight;
+
+    // Adjust camera aspect
+    camera.left = -frustumSize * (newWidth / newHeight) / 2;
+    camera.right = frustumSize * (newWidth / newHeight) / 2;
+    camera.top = frustumSize / 2;
+    camera.bottom = -frustumSize / 2;
     camera.updateProjectionMatrix();
-    renderer.setSize(container.clientWidth, container.clientHeight);
-});
+
+    // Update renderer size
+    renderer.setSize(newWidth, newHeight);
+}
+
+window.addEventListener('resize', onResize);
+
+// 3d mesh
+//===========================================
+
+const loader = new GLTFLoader();
+loader.load( './world_map/Brian_edited.glb', function ( gltf ) {
+
+	scene.add( gltf.scene );
+
+}, undefined, function ( error ) {
+
+	console.error( error );
+
+} );
 
 
+const light = new THREE.AmbientLight(new THREE.Color().setRGB( 1, 1, 1 ),4);
+scene.add( light );
+
+
+function iconFollowPoint()
+{
+    let pos = getScreenPosition(new THREE.Vector3( 0, 0, 0 ));
+
+    icon.style.top = pos.y*100 +"%";
+    icon.style.left = pos.x*100 +"%";
+}   
+
+function getScreenPosition(point3D) {
+    // Clone the point to avoid modifying the original
+    const projected = point3D.clone().project(camera);
+
+    const x = (projected.x * 0.5 + 0.5) ;
+    const y = (1 - (projected.y * 0.5 + 0.5)); // Flip Y for screen coordinates
+
+    return { x, y };
+}
 
 
 

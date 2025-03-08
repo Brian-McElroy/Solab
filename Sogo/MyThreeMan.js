@@ -41,24 +41,12 @@ renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setClearColor( 0xffffff, 0);
 container.appendChild(renderer.domElement);
 
-
-const linematerial = new THREE.LineBasicMaterial( { color: 0x0000ff } );
-const pointstwo = [];
-pointstwo.push( new THREE.Vector3( 0, -20, 0 ) );
-pointstwo.push( new THREE.Vector3( 0, 20, 0 ) );
-pointstwo.push( new THREE.Vector3( 20, 0, 0 ) );
-pointstwo.push( new THREE.Vector3( -20, 0, 0 ) );
-const linegeometrytwo = new THREE.BufferGeometry().setFromPoints( pointstwo );
-const linetwo = new THREE.Line( linegeometrytwo, linematerial );
-scene.add( linetwo );
-
-
 // Animation loop
 function animate() {
     //RotateCube();
     iconFollowPoint();
-    renderer.render(scene, camera);
     camera.translateX( 0.005 );
+    renderer.render(scene, camera);
 }
 renderer.setAnimationLoop(animate);
 

@@ -51,6 +51,7 @@ input
 
 #map
 {
+  overflow: hidden;
   position: absolute;
   top: 10%;
   padding: 0;

@@ -5,10 +5,14 @@ let icon = document.getElementById("testicon");
 let debugtxt = document.getElementById("debugtxt");
 
 // Select the div with id "map"
-const container = document.getElementById('map');
+export const container = document.getElementById('map');
+
+container.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+  }, { passive: false });
 
 // Set up scene, camera, and renderer
-const scene = new THREE.Scene();
+export const scene = new THREE.Scene();
 //scene.background = new THREE.Color( 0xff0000 );
 
 
@@ -19,13 +23,13 @@ const scene = new THREE.Scene();
 //const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
 
 
-const width = container.clientWidth;
-const height = container.clientHeight;
+export const width = container.clientWidth;
+export const height = container.clientHeight;
 
 // Orthographic Camera Setup
-const aspect = width / height;
-const frustumSize = 6; // Adjust this if needed
-const camera = new THREE.OrthographicCamera(
+export const aspect = width / height;
+export const frustumSize = 6; // Adjust this if needed
+export const camera = new THREE.OrthographicCamera(
     -frustumSize * aspect / 2,  // left
         frustumSize * aspect / 2,  // right
         frustumSize / 2,           // top
@@ -35,18 +39,18 @@ const camera = new THREE.OrthographicCamera(
 camera.position.z = 10; // Position the camera
 
 // Renderer
-const renderer = new THREE.WebGLRenderer({ alpha: true });
+export const renderer = new THREE.WebGLRenderer({ alpha: true });
 renderer.setSize(width, height);
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setClearColor( 0xffffff, 0);
 container.appendChild(renderer.domElement);
 
 // Animation loop
-function animate() {
-    //RotateCube();
-    iconFollowPoint();
-    camera.translateX( 0.005 );
+function animate()
+{
+    //iconFollowPoint();
     renderer.render(scene, camera);
+    //requestAnimationFrame(iconFollowPoint);
 }
 renderer.setAnimationLoop(animate);
 
@@ -86,8 +90,9 @@ loader.load( './world_map/Brian_edited.glb', function ( gltf ) {
 const light = new THREE.AmbientLight(new THREE.Color().setRGB( 1, 1, 1 ),4);
 scene.add( light );
 
-
-function iconFollowPoint()
+//  Markers
+//==================================================
+export function iconFollowPoint()
 {
     let pos = getScreenPosition(new THREE.Vector3( 0, 0, 0 ));
 
@@ -104,6 +109,3 @@ function getScreenPosition(point3D) {
 
     return { x, y };
 }
-
-
-

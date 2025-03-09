@@ -2,6 +2,7 @@ html, body
 {
    overflow: hidden;
    position: fixed;
+   touch-action: none;
    padding: 0;
    margin: 0;
    height: 100%;

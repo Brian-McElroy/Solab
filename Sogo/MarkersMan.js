@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { camera } from "./MyThreeMan.js";
-import { LocationPicked } from "./setlocation.js";
+//import { LocationPicked } from "./setlocation.js";
 
 
 let icon = document.getElementById("WhereUserIs");
@@ -8,6 +8,7 @@ let debugtxt = document.getElementById("debugtxt");
 
 const markerZ = 0;
 export let tappedPos;
+export let ChoseLocationFunction;
 
 //  Markers
 //==================================================
@@ -16,7 +17,7 @@ export function ClickedHere(here)
 {
     tappedPos = DivToWorldSpace(here);
     requestAnimationFrame(iconFollowPoint);
-    LocationPicked();
+    if(ChoseLocationFunction != null) ChoseLocationFunction();
     icon.style.display = "block";
 }
 

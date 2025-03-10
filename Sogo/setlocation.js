@@ -1,4 +1,5 @@
 import { tappedPos } from "./MarkersMan.js";
+import { ChoseLocationFunction } from "./MarkersMan.js";
 
 
 export function LocationPicked()
@@ -17,3 +18,4 @@ function OkPressed()
 
 let okbutton = document.getElementById("OkButton");
 okbutton.onclick = OkPressed;
+ChoseLocationFunction = LocationPicked;

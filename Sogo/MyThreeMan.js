@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-let icon = document.getElementById("testicon");
 let debugtxt = document.getElementById("debugtxt");
 
 // Select the div with id "map"
@@ -89,23 +88,3 @@ loader.load( './world_map/Brian_edited.glb', function ( gltf ) {
 
 const light = new THREE.AmbientLight(new THREE.Color().setRGB( 1, 1, 1 ),4);
 scene.add( light );
-
-//  Markers
-//==================================================
-export function iconFollowPoint()
-{
-    let pos = getScreenPosition(new THREE.Vector3( 0, 0, 0 ));
-
-    icon.style.top = pos.y*100 +"%";
-    icon.style.left = pos.x*100 +"%";
-}   
-
-function getScreenPosition(point3D) {
-    // Clone the point to avoid modifying the original
-    const projected = point3D.clone().project(camera);
-
-    const x = (projected.x * 0.5 + 0.5) ;
-    const y = (1 - (projected.y * 0.5 + 0.5)); // Flip Y for screen coordinates
-
-    return { x, y };
-}

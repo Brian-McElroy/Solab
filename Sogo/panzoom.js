@@ -2,12 +2,19 @@
 import { width } from "./MyThreeMan.js";
 import { height } from "./MyThreeMan.js";
 import { camera } from "./MyThreeMan.js";
-import { iconFollowPoint } from "./MyThreeMan.js";
+import { iconFollowPoint } from "./MarkersMan.js";
+import {ClickedHere } from "./MarkersMan.js";
+import { container } from "./MyThreeMan.js";
+
+let debugtxt = document.getElementById("debugtxt");
 
 // Controls
 let isDragging = false;
 let previousMousePosition = { x: 0, y: 0 };
+let startMousePosition = { x: 0, y: 0 };
 let touchDistance = 0;
+
+const leeway = 0.065;
 
 // Touch
 //========================================
@@ -55,6 +62,7 @@ function onTouchEnd() {
 function onMouseDown(event) {
     isDragging = true;
     previousMousePosition = { x: event.clientX, y: event.clientY };
+    startMousePosition = { x: event.clientX, y: event.clientY };
 }
 
 function onMouseMove(event) {
@@ -67,8 +75,22 @@ function onMouseMove(event) {
     requestAnimationFrame(iconFollowPoint);
 }
 
-function onMouseUp() {
+function onMouseUp(event) 
+{
     isDragging = false;
+
+    if(setlocationPage == null) return;
+    const dx = (event.clientX - startMousePosition.x) / width * 2;
+    const dy = (event.clientY - startMousePosition.y) / height * 2;
+    let dist = Math.sqrt(dx * dx + dy * dy);
+    //debugtxt.innerHTML = dist;
+    if(dist <= leeway)
+    {   
+        const rect = container.getBoundingClientRect(); // Get div's position & size
+        const x = (event.clientX - rect.left) / rect.width;  // Normalize X
+        const y = (event.clientY - rect.top) / rect.height;  // Normalize Y
+        ClickedHere({x:x,y:y })
+    }
 }
 
 function onWheel(event) {

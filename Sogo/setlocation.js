@@ -1,10 +1,19 @@
+import { tappedPos } from "./MarkersMan.js";
+
+
+export function LocationPicked()
+{
+    okbutton.style.display = "block";
+}
+
 
 function OkPressed()
 {
-    let location = [0.51094,0.59092];
+    let location = [tappedPos.x,tappedPos.y];
     localStorage.setItem(LocationKey, JSON.stringify(location));
 
     window.location = "Artist_Set_Genres.html"
 }
 
-document.getElementById("OkButton").onclick = OkPressed;
+let okbutton = document.getElementById("OkButton");
+okbutton.onclick = OkPressed;

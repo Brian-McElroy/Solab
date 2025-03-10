@@ -21,6 +21,11 @@ p
     margin: 10vh 2vh;
 }
 
+.toptext
+{
+  margin: 3.5vh 2vh ;
+}
+
 button
 {
   font-size: 4vh;
@@ -60,7 +65,7 @@ input
   width: 100%;
 } 
 
-#testicon
+#WhereUserIs
 {
   position: absolute;
   height: 5vh;
@@ -69,6 +74,7 @@ input
   left: 100%; /* Move right 100px */
   background-color: red;
   transform: translate(-50%, -50%);
+  border-radius: 50%;
 } 
 
 .selectedgenreButton

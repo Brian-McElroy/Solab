@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<link rel="stylesheet" href="style.css" />
-        <script src="constants.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="./style.css" />
+		<script type="importmap">
+		{
+			"imports": {
+			"three": "https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.js",
+			"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.163.0/examples/jsm/"
+			}
+		}
+		</script>
+		<script>let setlocationPage = true;</script>
+		<script src="constants.js"></script>
 		<script src="jquery-3.7.1.min.js"></script>
-		<script src="setlocation.js" defer></script> 
+		<script type="module" src="setlocation.js" defer></script>
+		<script type="module" src="MyThreeMan.js"></script>
+		<script type="module" src="MarkersMan.js"></script>
+		<script type="module" src="panzoom.js"></script>
 	</head>
 	<body>
-		<p>Choose Your location</p>
-        <button id="OkButton" type="button">Ok</button> 
+	<p  class="toptext" >Where are you in the world?</p>
+	<p id="debugtxt"></p>
+	<div id="map">
+		<div style="display: none;" id="WhereUserIs"></div>
+	</div>
+	<button style="display: none;" id="OkButton" type="button">Ok</button> 
 	</body>
 </html>

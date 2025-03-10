@@ -28,7 +28,9 @@ function getTouchDistance(touches) {
 function onTouchStart(event) {
     if (event.touches.length === 2) {
         touchDistance = getTouchDistance(event.touches);
-    } else if (event.touches.length === 1) {
+    } else if (event.touches.length === 1)
+    {      
+        startMousePosition ={ x: event.touches[0].clientX, y: event.touches[0].clientY };
         previousMousePosition = { x: event.touches[0].clientX, y: event.touches[0].clientY };
     }
 }
@@ -52,8 +54,14 @@ function onTouchMove(event) {
     }
 }
 
-function onTouchEnd() {
+function onTouchEnd(event)
+{
     touchDistance = 0;
+
+    if (event.touches.length === 1)
+    {
+        HandleTapToSetLocation(event.touches[0].clientX,event.touches[0].clientY)
+    }   
 }
 
 // Mouse
@@ -78,19 +86,7 @@ function onMouseMove(event) {
 function onMouseUp(event) 
 {
     isDragging = false;
-
-    if(setlocationPage == null) return;
-    const dx = (event.clientX - startMousePosition.x) / width * 2;
-    const dy = (event.clientY - startMousePosition.y) / height * 2;
-    let dist = Math.sqrt(dx * dx + dy * dy);
-    //debugtxt.innerHTML = dist;
-    if(dist <= leeway)
-    {   
-        const rect = container.getBoundingClientRect(); // Get div's position & size
-        const x = (event.clientX - rect.left) / rect.width;  // Normalize X
-        const y = (event.clientY - rect.top) / rect.height;  // Normalize Y
-        ClickedHere({x:x,y:y })
-    }
+    HandleTapToSetLocation(event.clientX,event.clientY )
 }
 
 function onWheel(event) {
@@ -103,6 +99,26 @@ function onWheel(event) {
     camera.updateProjectionMatrix();
     requestAnimationFrame(iconFollowPoint);
 }
+
+// Both
+//=======================================
+
+function HandleTapToSetLocation(eventX,eventY)
+{
+    if(setlocationPage == null) return;
+    const dx = (eventX - startMousePosition.x) / width * 2;
+    const dy = (eventY - startMousePosition.y) / height * 2;
+    let dist = Math.sqrt(dx * dx + dy * dy);
+    //debugtxt.innerHTML = dist;
+    if(dist <= leeway)
+    {   
+        const rect = container.getBoundingClientRect(); // Get div's position & size
+        const x = (eventX - rect.left) / rect.width;  // Normalize X
+        const y = (eventY - rect.top) / rect.height;  // Normalize Y
+        ClickedHere({x:x,y:y })
+    }
+}
+
 
 window.addEventListener('mousedown', onMouseDown);
 window.addEventListener('mousemove', onMouseMove);

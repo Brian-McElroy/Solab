@@ -77,6 +77,18 @@ input
   border-radius: 50%;
 } 
 
+#ArtistMarker
+{
+  position: absolute;
+  height: 3vh;
+  width: 3vh;
+  top: 100% ;   /* Move down 50px */
+  left: 100%; /* Move right 100px */
+  background-color: black;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+} 
+
 .selectedgenreButton
 {
   color: yellow;

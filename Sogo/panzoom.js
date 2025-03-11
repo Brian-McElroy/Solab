@@ -109,7 +109,9 @@ function onWheel(event) {
 
 function HandleTapToSetLocation(eventX,eventY)
 {
-    if(setlocationPage == null) return;
+    if( typeof setlocationPage === 'undefined') return;
+    if(!isMouseUpInsideDiv(eventX,eventY)) return;
+
     const dx = (eventX - startMousePosition.x) / width * 2;
     const dy = (eventY - startMousePosition.y) / height * 2;
     let dist = Math.sqrt(dx * dx + dy * dy);
@@ -121,6 +123,17 @@ function HandleTapToSetLocation(eventX,eventY)
         const y = (eventY - rect.top) / rect.height;  
         ClickedHere({x:x,y:y })
     }
+}
+
+function isMouseUpInsideDiv(eventX,eventY)
+{
+    const rect = container.getBoundingClientRect();
+    return(
+        eventX >= rect.left &&
+        eventX <= rect.right &&
+        eventY >= rect.top &&
+        eventY <= rect.bottom
+    );
 }
 
 

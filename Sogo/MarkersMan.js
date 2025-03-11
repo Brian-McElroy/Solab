@@ -1,21 +1,55 @@
 import * as THREE from 'three';
 import { camera } from "./MyThreeMan.js";
+import { topleft } from "./MyThreeMan.js";
+import { botright } from "./MyThreeMan.js";
 //import { LocationPicked } from "./setlocation.js";
 
+let markersData;
+let DOMmarkers = [];
 
 let icon = document.getElementById("WhereUserIs");
 let debugtxt = document.getElementById("debugtxt");
 
 const markerZ = 0;
-export let tappedPos;
+let tappedPos;
 export let ChoseLocationFunction;
 
+export function setChoseLocationFunction(fn)
+{
+    ChoseLocationFunction = fn;
+}
 //  Markers
 //==================================================
 
-export function GotData()
+function GetData()
 {
+    if( typeof MainMapPage === 'undefined') return;
 
+    $.get(
+        ServerUrl + "/GetArtistData",
+        {},
+        function(data)
+        {
+            markersData = data;
+            CreateMarkers(data);
+            requestAnimationFrame(iconFollowPoint);
+        }
+    );
+}
+
+function CreateMarkers(data)
+{
+    const node = document.getElementById("map");
+
+    for (let i = 0; i < markersData.Artists.length; i++)
+    {
+        const clone = node.firstElementChild.cloneNode(true);
+        DOMmarkers.push(clone);
+        clone.style.display = "block";     
+        node.appendChild(clone); 
+    } 
+
+    node.firstElementChild.remove();
 }
 
 export function ClickedHere(here)
@@ -26,15 +60,45 @@ export function ClickedHere(here)
     icon.style.display = "block";
 }
 
+export function GetTappedLerped()
+{
+    let answer =[];
+    answer.push(inverseLerp(topleft.position.x,botright.position.x,tappedPos.x));
+    answer.push(inverseLerp(topleft.position.y,botright.position.y,tappedPos.y));
+    return [answer];
+}
+
 export function iconFollowPoint()
 {
-    let pos = worldToDivSpace(new THREE.Vector3( 0, 0, markerZ ));
+    if( typeof MainMapPage !== 'undefined') 
+    {
+        for (let i = 0; i < markersData.Artists.length; i++)
+        {
+            DrawOneIcon(DOMmarkers[i],LerpPos(markersData.Artists[i].location));
+        } 
+    }
 
-    if(tappedPos != null) pos = worldToDivSpace(tappedPos);
+    if( typeof setlocationPage !== 'undefined') 
+    {
 
+    }
+    return;
+}   
+
+function LerpPos(location)
+{
+    let vec = new THREE.Vector3(MylerpUnclamped(topleft.position.x,botright.position.x,location[0])
+    ,MylerpUnclamped(topleft.position.y,botright.position.y,location[1]), markerZ);
+    //console.log(JSON.stringify(vec));
+    return vec;
+}
+
+function DrawOneIcon(icon,worldpos)
+{
+    let pos = worldToDivSpace(worldpos);
     icon.style.top = pos.y*100 +"%";
     icon.style.left = pos.x*100 +"%";
-}   
+}
 
 // Transformations
 //===================================================
@@ -59,3 +123,5 @@ function DivToWorldSpace(screenPos) {
     ndcPoint.unproject(camera);
     return ndcPoint;
 }
+
+GetData();

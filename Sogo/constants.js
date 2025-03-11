@@ -16,3 +16,13 @@ function CheckCode(invitecode)
   if(invitecode.length != 32) return false;
   return true;
 }
+
+function inverseLerp(startValue, endValue, currentValue)
+{
+  return startValue === endValue ? 0 : (currentValue - startValue) / (endValue - startValue);
+}
+
+function MylerpUnclamped(start, end, t)
+{
+  return start + (end - start) * t;
+}

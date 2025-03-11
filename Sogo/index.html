@@ -11,10 +11,10 @@
 			}
 		}
 		</script>
+		<script>let MainMapPage = true;</script>
 		<script src="constants.js"></script>
 		<script src="jquery-3.7.1.min.js"></script>
 		<script src="map.js"></script>
-		<script type="module" src="ArtistDataMan.js"></script>
 		<script type="module" src="MyThreeMan.js"></script>
 		<script type="module" src="MarkersMan.js"></script>
 		<script type="module" src="panzoom.js"></script>
@@ -22,7 +22,7 @@
 	<body>
 	<p id="debugtxt"></p>
 	<div id="map">
-		<div id="testicon"></div>
+		<div style="display: none;" id="ArtistMarker"></div>
 	</div>
 	</body>
 </html>

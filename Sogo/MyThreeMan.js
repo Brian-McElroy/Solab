@@ -93,7 +93,12 @@ scene.add( light );
 // Bounds
 //===========================================
 
-const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+const geometry = new THREE.BoxGeometry( 0.3, 0.3, 0.3 );
 const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
+export const topleft = new THREE.Mesh( geometry, material );
+scene.add( topleft );
+topleft.position.set(-4,2.5,0); // (x, y, z)
+
+export const botright = new THREE.Mesh( geometry, material );
+scene.add( botright );
+botright.position.set(5,-1.8,0); // (x, y, z)

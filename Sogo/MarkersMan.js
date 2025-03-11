@@ -2,13 +2,18 @@ import * as THREE from 'three';
 import { camera } from "./MyThreeMan.js";
 import { topleft } from "./MyThreeMan.js";
 import { botright } from "./MyThreeMan.js";
+import { container} from "./MyThreeMan.js";
 //import { LocationPicked } from "./setlocation.js";
 
 let markersData;
 let DOMmarkers = [];
+let openArtistDetails = null;
+let startX, startY;
+let isDragging = false;
 
 let icon = document.getElementById("WhereUserIs");
 let debugtxt = document.getElementById("debugtxt");
+let details = document.getElementById("ArtistInfo");
 
 const markerZ = 0;
 let tappedPos;
@@ -18,6 +23,16 @@ export function setChoseLocationFunction(fn)
 {
     ChoseLocationFunction = fn;
 }
+
+container.addEventListener('pointerup', (e) =>
+{
+    debugtxt.innerHTML = e.target.class;
+    if (e.target === container)
+    { 
+        console.log('Tapped on the background!');
+    } 
+});
+
 //  Markers
 //==================================================
 
@@ -47,11 +62,60 @@ function CreateMarkers(data)
         let clone = node.firstElementChild.cloneNode(true);
         DOMmarkers.push(clone);
         clone.style.display = "block";  
-        //clone.id = markersData.Artists[i].name;
+        clone.artistIndex = i;
+        AddArtistImage(clone,markersData.Artists[i]);
+        SetInteraction(clone);
         node.appendChild(clone); 
     } 
 
     node.firstElementChild.remove();
+}
+
+function SetInteraction(div)
+{   
+    div.addEventListener('pointerdown', (e) => {
+        startX = e.clientX;
+        startY = e.clientY;
+        isDragging = false; // Reset flag
+    });
+
+    div.addEventListener('pointermove', (e) => {
+        const threshold = 5; // Allow small movements but not dragging
+        if (Math.abs(e.clientX - startX) > threshold || Math.abs(e.clientY - startY) > threshold) {
+            isDragging = true; // Mark as dragging
+        }
+    });
+
+    div.addEventListener('pointerup', (e) => {
+        if (!isDragging)
+        {
+            OpenArtistDetails(div.artistIndex);
+        }
+    });
+    
+    div.addEventListener('dragstart', (e) => {
+        e.preventDefault(); // Prevent drag
+    });    
+}
+
+function OpenArtistDetails(index)
+{
+    details.style.display = "block"; 
+    openArtistDetails = index;
+    requestAnimationFrame(iconFollowPoint);
+}
+
+function CloseArtistDetails(index)
+{
+    details.style.display = "none"; 
+    openArtistDetails = null;
+}
+
+function AddArtistImage(node,artistdata)
+{
+    if(typeof(artistdata.image) === "undefined") return;
+    if(artistdata.image == null) return;
+    node.firstElementChild.src =artistdata.image;
 }
 
 export function ClickedHere(here)
@@ -78,6 +142,7 @@ export function iconFollowPoint()
         {
             DrawOneIcon(DOMmarkers[i],LerpPos(markersData.Artists[i].location));
         } 
+        if(openArtistDetails != null) DrawOneIcon(details,LerpPos(markersData.Artists[openArtistDetails].location));
     }
 
     if( typeof setlocationPage !== 'undefined') 

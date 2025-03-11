@@ -12,6 +12,7 @@ let debugtxt = document.getElementById("debugtxt");
 let isDragging = false;
 let previousMousePosition = { x: 0, y: 0 };
 let startMousePosition = { x: 0, y: 0 };
+let currentMousePosition = { x: 0, y: 0 };
 let touchDistance = 0;
 
 const leeway = 0.065;
@@ -32,6 +33,7 @@ function onTouchStart(event) {
     {      
         startMousePosition ={ x: event.touches[0].clientX, y: event.touches[0].clientY };
         previousMousePosition = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+        currentMousePosition = { x: event.touches[0].clientX, y: event.touches[0].clientY };
     }
 }
 
@@ -50,17 +52,19 @@ function onTouchMove(event) {
         const deltaY = (event.touches[0].clientY - previousMousePosition.y) / height * 2;
         camera.position.x -= deltaX * camera.right;
         camera.position.y += deltaY * camera.top;
+        currentMousePosition = { x: event.touches[0].clientX, y: event.touches[0].clientY };
         previousMousePosition = { x: event.touches[0].clientX, y: event.touches[0].clientY };
     }
+    requestAnimationFrame(iconFollowPoint);
 }
 
 function onTouchEnd(event)
 {
     touchDistance = 0;
 
-    if (event.touches.length === 1)
+    if (event.touches.length === 0)
     {
-        HandleTapToSetLocation(event.touches[0].clientX,event.touches[0].clientY)
+        HandleTapToSetLocation(currentMousePosition.x,currentMousePosition.y)
     }   
 }
 

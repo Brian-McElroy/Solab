@@ -88,3 +88,12 @@ loader.load( './world_map/Brian_edited.glb', function ( gltf ) {
 
 const light = new THREE.AmbientLight(new THREE.Color().setRGB( 1, 1, 1 ),4);
 scene.add( light );
+
+
+// Bounds
+//===========================================
+
+const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+const cube = new THREE.Mesh( geometry, material );
+scene.add( cube );

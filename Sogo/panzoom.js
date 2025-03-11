@@ -116,9 +116,9 @@ function HandleTapToSetLocation(eventX,eventY)
     //debugtxt.innerHTML = dist;
     if(dist <= leeway)
     {   
-        const rect = container.getBoundingClientRect(); // Get div's position & size
-        const x = (eventX - rect.left) / rect.width;  // Normalize X
-        const y = (eventY - rect.top) / rect.height;  // Normalize Y
+        const rect = container.getBoundingClientRect(); 
+        const x = (eventX - rect.left) / rect.width;  
+        const y = (eventY - rect.top) / rect.height;  
         ClickedHere({x:x,y:y })
     }
 }

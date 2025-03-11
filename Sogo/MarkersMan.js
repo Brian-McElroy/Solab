@@ -13,6 +13,11 @@ export let ChoseLocationFunction;
 //  Markers
 //==================================================
 
+export function GotData()
+{
+
+}
+
 export function ClickedHere(here)
 {
     tappedPos = DivToWorldSpace(here);
@@ -31,7 +36,7 @@ export function iconFollowPoint()
     icon.style.left = pos.x*100 +"%";
 }   
 
-
+// Transformations
 //===================================================
 
 function worldToDivSpace(point3D)

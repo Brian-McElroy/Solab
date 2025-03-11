@@ -31,6 +31,7 @@ function GetData()
         function(data)
         {
             markersData = data;
+            //debugtxt.innerHTML = JSON.stringify(markersData);
             CreateMarkers(data);
             requestAnimationFrame(iconFollowPoint);
         }
@@ -43,9 +44,10 @@ function CreateMarkers(data)
 
     for (let i = 0; i < markersData.Artists.length; i++)
     {
-        const clone = node.firstElementChild.cloneNode(true);
+        let clone = node.firstElementChild.cloneNode(true);
         DOMmarkers.push(clone);
-        clone.style.display = "block";     
+        clone.style.display = "block";  
+        //clone.id = markersData.Artists[i].name;
         node.appendChild(clone); 
     } 
 
@@ -65,7 +67,7 @@ export function GetTappedLerped()
     let answer =[];
     answer.push(inverseLerp(topleft.position.x,botright.position.x,tappedPos.x));
     answer.push(inverseLerp(topleft.position.y,botright.position.y,tappedPos.y));
-    return [answer];
+    return answer;
 }
 
 export function iconFollowPoint()

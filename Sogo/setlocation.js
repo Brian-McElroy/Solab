@@ -13,6 +13,8 @@ function OkPressed()
     let location =  GetTappedLerped();
     localStorage.setItem(LocationKey, JSON.stringify(location));
 
+    console.log(JSON.stringify(location));
+
     //document.getElementById("debugtxt").innerHTML += JSON.stringify(location);
     window.location = "Artist_Set_Genres.html"
 }

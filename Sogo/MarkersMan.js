@@ -80,7 +80,7 @@ export function iconFollowPoint()
 
     if( typeof setlocationPage !== 'undefined') 
     {
-
+        DrawOneIcon(icon,tappedPos)
     }
     return;
 }   

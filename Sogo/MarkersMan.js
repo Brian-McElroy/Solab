@@ -24,15 +24,6 @@ export function setChoseLocationFunction(fn)
     ChoseLocationFunction = fn;
 }
 
-container.addEventListener('pointerup', (e) =>
-{
-    debugtxt.innerHTML = e.target.class;
-    if (e.target === container)
-    { 
-        console.log('Tapped on the background!');
-    } 
-});
-
 //  Markers
 //==================================================
 
@@ -64,7 +55,7 @@ function CreateMarkers(data)
         clone.style.display = "block";  
         clone.artistIndex = i;
         AddArtistImage(clone,markersData.Artists[i]);
-        SetInteraction(clone);
+        //SetInteraction(clone);
         node.appendChild(clone); 
     } 
 
@@ -87,10 +78,17 @@ function SetInteraction(div)
     });
 
     div.addEventListener('pointerup', (e) => {
-        if (!isDragging)
+    if (!isDragging)
+    {
+        if(e.target.className === "ArtistMarkerImage")
         {
-            OpenArtistDetails(div.artistIndex);
+            OpenArtistDetails(e.target.parentNode.artistIndex);
         }
+        else if(e.target instanceof HTMLCanvasElement)
+        {
+            CloseArtistDetails();
+        }
+    }
     });
     
     div.addEventListener('dragstart', (e) => {
@@ -192,3 +190,4 @@ function DivToWorldSpace(screenPos) {
 }
 
 GetData();
+SetInteraction(container);

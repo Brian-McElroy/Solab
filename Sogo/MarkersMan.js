@@ -14,6 +14,8 @@ let isDragging = false;
 let icon = document.getElementById("WhereUserIs");
 let debugtxt = document.getElementById("debugtxt");
 let details = document.getElementById("ArtistInfo");
+let DetailsName = document.getElementById("DetailsName");
+let DetailsGenres = document.getElementById("DetailsGenres");
 
 const markerZ = 0;
 let tappedPos;
@@ -99,8 +101,21 @@ function SetInteraction(div)
 function OpenArtistDetails(index)
 {
     details.style.display = "block"; 
+    DetailsName.innerHTML = markersData.Artists[index].name;
+    DetailsGenres.innerHTML = GenresToString(index);
     openArtistDetails = index;
     requestAnimationFrame(iconFollowPoint);
+}
+
+function GenresToString(index)
+{
+    let answer ="";
+    for (let i = 0; i < markersData.Artists[index].genres.length; i++)
+    {
+        if(i > 0) answer +=",";
+        answer += markersData.Genres[markersData.Artists[index].genres[i]];
+    }
+    return answer;    
 }
 
 function CloseArtistDetails(index)

@@ -5,6 +5,8 @@ import { camera } from "./MyThreeMan.js";
 import { iconFollowPoint } from "./MarkersMan.js";
 import {ClickedHere } from "./MarkersMan.js";
 import { container } from "./MyThreeMan.js";
+import { topleftExtents } from "./MyThreeMan.js";
+import { botrightExtents } from "./MyThreeMan.js";
 
 let debugtxt = document.getElementById("debugtxt");
 
@@ -14,6 +16,7 @@ let previousMousePosition = { x: 0, y: 0 };
 let startMousePosition = { x: 0, y: 0 };
 let currentMousePosition = { x: 0, y: 0 };
 let touchDistance = 0;
+let multitouch = false;
 
 const leeway = 0.065;
 
@@ -27,6 +30,8 @@ function getTouchDistance(touches) {
 }
 
 function onTouchStart(event) {
+    if (event.touches.length > 1) multitouch = true;
+
     if (event.touches.length === 2) {
         touchDistance = getTouchDistance(event.touches);
     } else if (event.touches.length === 1)
@@ -55,6 +60,7 @@ function onTouchMove(event) {
         currentMousePosition = { x: event.touches[0].clientX, y: event.touches[0].clientY };
         previousMousePosition = { x: event.touches[0].clientX, y: event.touches[0].clientY };
     }
+    clampCameraToExtents(camera,topleftExtents,botrightExtents);
     requestAnimationFrame(iconFollowPoint);
 }
 
@@ -62,6 +68,13 @@ function onTouchEnd(event)
 {
     touchDistance = 0;
 
+    if (event.touches.length < 1) multitouch = false;
+
+    if (event.touches.length === 1)
+    {
+        previousMousePosition = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+        currentMousePosition = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+    }   
     if (event.touches.length === 0)
     {
         HandleTapToSetLocation(currentMousePosition.x,currentMousePosition.y)
@@ -84,6 +97,7 @@ function onMouseMove(event) {
     camera.position.x -= deltaX * camera.right;
     camera.position.y += deltaY * camera.top;
     previousMousePosition = { x: event.clientX, y: event.clientY };
+    clampCameraToExtents(camera,topleftExtents,botrightExtents);
     requestAnimationFrame(iconFollowPoint);
 }
 
@@ -100,7 +114,8 @@ function onWheel(event) {
     camera.right *= scale;
     camera.top *= scale;
     camera.bottom *= scale;
-    camera.updateProjectionMatrix();
+    clampCameraToExtents(camera,topleftExtents,botrightExtents);
+    //camera.updateProjectionMatrix();
     requestAnimationFrame(iconFollowPoint);
 }
 
@@ -109,6 +124,7 @@ function onWheel(event) {
 
 function HandleTapToSetLocation(eventX,eventY)
 {
+    if(multitouch) return;
     if( typeof setlocationPage === 'undefined') return;
     if(!isMouseUpInsideDiv(eventX,eventY)) return;
 
@@ -134,6 +150,50 @@ function isMouseUpInsideDiv(eventX,eventY)
         eventY >= rect.top &&
         eventY <= rect.bottom
     );
+}
+
+// Panzoom limits
+
+function clampCameraToExtents(camera, topleft, botright) {
+    // Calculate available space in extents
+    const maxWidth = botright.position.x - topleft.position.x;
+    const maxHeight = topleft.position.y - botright.position.y;
+
+    // Get current frustum size
+    let width = camera.right - camera.left;
+    let height = camera.top - camera.bottom;
+
+    // Limit zoom: Ensure the camera's frustum is never larger than the extents
+    const zoomX = maxWidth / width;
+    const zoomY = maxHeight / height;
+    const maxZoom = Math.min(zoomX, zoomY);
+
+    if (maxZoom < 1) {
+        // If zoomed out too far, scale down the frustum to fit
+        width *= maxZoom;
+        height *= maxZoom;
+        camera.left = -width / 2;
+        camera.right = width / 2;
+        camera.top = height / 2;
+        camera.bottom = -height / 2;
+    }
+
+    // Recalculate camera width/height after zoom correction
+    width = camera.right - camera.left;
+    height = camera.top - camera.bottom;
+
+    // Clamp X position
+    const minX = topleft.position.x + width / 2;
+    const maxX = botright.position.x - width / 2;
+    camera.position.x = Math.max(minX, Math.min(maxX, camera.position.x));
+
+    // Clamp Y position
+    const minY = botright.position.y + height / 2;
+    const maxY = topleft.position.y - height / 2;
+    camera.position.y = Math.max(minY, Math.min(maxY, camera.position.y));
+
+    // Update projection matrix
+    camera.updateProjectionMatrix();
 }
 
 

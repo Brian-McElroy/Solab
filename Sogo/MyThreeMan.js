@@ -96,9 +96,20 @@ scene.add( light );
 const geometry = new THREE.BoxGeometry( 0.3, 0.3, 0.3 );
 const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 export const topleft = new THREE.Mesh( geometry, material );
-scene.add( topleft );
+//scene.add( topleft );
 topleft.position.set(-4,2.5,0); // (x, y, z)
 
 export const botright = new THREE.Mesh( geometry, material );
-scene.add( botright );
+//scene.add( botright );
 botright.position.set(5,-1.8,0); // (x, y, z)
+
+// pan /zoom bounds
+//=====================
+
+export const topleftExtents = new THREE.Mesh( geometry, material );
+scene.add( topleftExtents );
+topleftExtents.position.set(-7,6,0); // (x, y, z)
+
+export const botrightExtents = new THREE.Mesh( geometry, material );
+scene.add( botrightExtents );
+botrightExtents.position.set(8,-4.8,0); // (x, y, z)

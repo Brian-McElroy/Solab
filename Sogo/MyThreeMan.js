@@ -14,7 +14,7 @@ container.addEventListener('touchstart', (e) => {
 export const scene = new THREE.Scene();
 //scene.background = new THREE.Color( 0xff0000 );
 
-
+// PERSPCTIVE CAMERA
 //const width = container.clientWidth *scale;
 //const height = container.clientHeight *scale;
 //const camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 1, 1000 );

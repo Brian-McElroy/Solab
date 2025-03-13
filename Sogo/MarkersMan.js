@@ -5,9 +5,9 @@ import { botright } from "./MyThreeMan.js";
 import { container} from "./MyThreeMan.js";
 //import { LocationPicked } from "./setlocation.js";
 
-let markersData;
+export let markersData;
 let DOMmarkers = [];
-let openArtistDetails = null;
+export let openArtistDetails = null;
 let startX, startY;
 let isDragging = false;
 
@@ -66,6 +66,8 @@ function CreateMarkers(data)
 
 function SetInteraction(div)
 {   
+    if( typeof MainMapPage === 'undefined') return;
+
     div.addEventListener('pointerdown', (e) => {
         startX = e.clientX;
         startY = e.clientY;
@@ -186,6 +188,7 @@ function DrawOneIcon(icon,worldpos)
 function worldToDivSpace(point3D)
  {
     // Clone the point to avoid modifying the original
+    if (!point3D) return;
     const projected = point3D.clone().project(camera);
     const x = (projected.x * 0.5 + 0.5) ;
     const y = (1 - (projected.y * 0.5 + 0.5)); // Flip Y for screen coordinates

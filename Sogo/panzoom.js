@@ -154,8 +154,10 @@ function isMouseUpInsideDiv(eventX,eventY)
 
 // Panzoom limits
 
-function clampCameraToExtents(camera, topleft, botright,maxZoomIn = 0.05)
+function clampCameraToExtents(camera, topleft, botright)
  {
+    let maxZoomIn = 0.05;
+
     // Calculate available space in extents
     const maxWidth = botright.position.x - topleft.position.x;
     const maxHeight = topleft.position.y - botright.position.y;

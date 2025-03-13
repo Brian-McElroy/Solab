@@ -19,7 +19,7 @@ function OkPressed()
 function IsURLOk(extracted)
 {
     if(extracted.album == null && extracted.track == null) return false;
-    //if(extracted.href == null ) return false;
+    if(extracted.href == null ) return false;
     //if(extracted.hrefText == null ) return false;
     return true;
 }
@@ -29,7 +29,7 @@ function extractBandcampInfo(html)
   return{
       album: html.match(/album=(\d+)/)?.[1] || null,
       track: html.match(/track=(\d+)/)?.[1] || null,
-      //href: html.match(/<a href="([^"]+)"/)?.[1] || null,
+      href: html.match(/<a href="([^"]+)"/)?.[1] || null,
       //hrefText: html.match(/<a[^>]*>(.*?)<\/a>/)?.[1] || null
   };
 }

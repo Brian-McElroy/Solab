@@ -16,6 +16,8 @@ let debugtxt = document.getElementById("debugtxt");
 let details = document.getElementById("ArtistInfo");
 let DetailsName = document.getElementById("DetailsName");
 let DetailsGenres = document.getElementById("DetailsGenres");
+let DetailsBCLink = document.getElementById("DetailsBandCampLink");
+let DetailsHereLink = document.getElementById("DetailsHereLink");
 
 const markerZ = 0;
 let tappedPos;
@@ -108,6 +110,19 @@ function OpenArtistDetails(index)
     openArtistDetails = index;
     requestAnimationFrame(iconFollowPoint);
 }
+
+function DetailsGotoBCClicked()
+{
+    let bcurl = markersData.Artists[openArtistDetails].track.href;
+    if(typeof bcurl === 'undefined') return;
+
+    window.open(bcurl);
+}
+
+function DetailsHereLinkClicked()
+{
+}
+
 
 function GenresToString(index)
 {
@@ -209,3 +224,6 @@ function DivToWorldSpace(screenPos) {
 
 GetData();
 SetInteraction(container);
+
+DetailsBCLink.onclick = DetailsGotoBCClicked;
+DetailsHereLink.onclick = DetailsHereLinkClicked;

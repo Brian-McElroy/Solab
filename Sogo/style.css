@@ -108,8 +108,8 @@ textarea
   -webkit-user-drag: none; /* Prevent image dragging on WebKit browsers */
   position: absolute;
   overflow: hidden;
-  height: 4vh;
-  width: 4vh;
+  height: 5.5vh;
+  width: 5.5vh;
   background-color: black;
   transform: translate(-50%, -50%);
   border-radius: 50%;
@@ -120,6 +120,17 @@ textarea
   height: 100%;
   width: 100%;
 } 
+
+#ArtistDetailsImage
+{
+  height: 10vh;
+  width:  10vh;
+  border-radius: 50%;
+  position: absolute;
+  top: 0%;   
+  left: 0%;
+  transform: translate(-20%, -20%);
+}
 
 #ArtistInfo
 {

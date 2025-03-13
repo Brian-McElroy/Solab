@@ -154,7 +154,8 @@ function isMouseUpInsideDiv(eventX,eventY)
 
 // Panzoom limits
 
-function clampCameraToExtents(camera, topleft, botright) {
+function clampCameraToExtents(camera, topleft, botright,maxZoomIn = 0.05)
+ {
     // Calculate available space in extents
     const maxWidth = botright.position.x - topleft.position.x;
     const maxHeight = topleft.position.y - botright.position.y;
@@ -163,20 +164,26 @@ function clampCameraToExtents(camera, topleft, botright) {
     let width = camera.right - camera.left;
     let height = camera.top - camera.bottom;
 
-    // Limit zoom: Ensure the camera's frustum is never larger than the extents
-    const zoomX = maxWidth / width;
-    const zoomY = maxHeight / height;
-    const maxZoom = Math.min(zoomX, zoomY);
+    // Determine max zoom out limit (letterboxing)
+    const zoomOutX = maxWidth / width;
+    const zoomOutY = maxHeight / height;
+    const maxZoomOut = Math.min(zoomOutX, zoomOutY);
 
-    if (maxZoom < 1) {
-        // If zoomed out too far, scale down the frustum to fit
-        width *= maxZoom;
-        height *= maxZoom;
-        camera.left = -width / 2;
-        camera.right = width / 2;
-        camera.top = height / 2;
-        camera.bottom = -height / 2;
-    }
+    // Determine max zoom in limit (arbitrary limit)
+    const minWidth = maxWidth * maxZoomIn;
+    const minHeight = maxHeight * maxZoomIn;
+    const zoomInX = minWidth / width;
+    const zoomInY = minHeight / height;
+    const maxZoomInFactor = Math.max(zoomInX, zoomInY); // Ensures it doesn't zoom in past the limit
+
+    // Apply zoom limits
+    const zoomFactor = Math.min(Math.max(maxZoomInFactor, 1), maxZoomOut);
+    width *= zoomFactor;
+    height *= zoomFactor;
+    camera.left = -width / 2;
+    camera.right = width / 2;
+    camera.top = height / 2;
+    camera.bottom = -height / 2;
 
     // Recalculate camera width/height after zoom correction
     width = camera.right - camera.left;

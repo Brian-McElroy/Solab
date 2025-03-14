@@ -30,7 +30,7 @@ function extractBandcampInfo(html)
       album: html.match(/album=(\d+)/)?.[1] || null,
       track: html.match(/track=(\d+)/)?.[1] || null,
       href: html.match(/<a href="([^"]+)"/)?.[1] || null,
-      //hrefText: html.match(/<a[^>]*>(.*?)<\/a>/)?.[1] || null
+      displayName: html.match(/by\s+([^<]+)/)?.[1].trim() || null, 
   };
 }
 

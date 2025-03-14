@@ -227,5 +227,9 @@ function DivToWorldSpace(screenPos) {
 GetData();
 SetInteraction(container);
 
-DetailsBCLink.onclick = DetailsGotoBCClicked;
-DetailsHereLink.onclick = DetailsHereLinkClicked;
+
+if( typeof MainMapPage !== 'undefined')
+{
+    DetailsBCLink.onclick = DetailsGotoBCClicked;
+    DetailsHereLink.onclick = DetailsHereLinkClicked;
+}

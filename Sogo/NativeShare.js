@@ -19,5 +19,16 @@ function ShareSite()
     }
 }
 
-document.getElementById("LinkToHereButton").onclick = ShareSite;
+let sharebut = document.getElementById("LinkToHereButton");
+
+if(OverrideMobileOnly || navigator.share)
+{
+    sharebut.onclick = ShareSite;
+}
+else
+{
+    sharebut.style.display = 'none';
+}
+
+
 

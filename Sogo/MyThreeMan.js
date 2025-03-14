@@ -29,7 +29,7 @@ export const height = container.clientHeight;
 
 // Orthographic Camera Setup
 export const aspect = width / height;
-export const frustumSize = 6; // Adjust this if needed
+export const frustumSize = 3; // Adjust this if needed
 export const camera = new THREE.OrthographicCamera(
     -frustumSize * aspect / 2,  // left
         frustumSize * aspect / 2,  // right

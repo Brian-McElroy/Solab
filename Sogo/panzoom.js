@@ -113,8 +113,8 @@ function onMouseMove(event) {
     camera.position.x -= deltaX * camera.right;
     camera.position.y += deltaY * camera.top;
 
-    currentVelocityVec = new THREE.Vector2(deltaX,deltaY);
-    DontSlideIfTooSlow();
+    //currentVelocityVec = new THREE.Vector2(deltaX,deltaY);
+    //DontSlideIfTooSlow();
 
     previousMousePosition = { x: event.clientX, y: event.clientY };
     clampCameraToExtents(camera,topleftExtents,botrightExtents);
@@ -123,8 +123,6 @@ function onMouseMove(event) {
 
 function onMouseUp(event) 
 {
-    debugtxt.innerHTML = currentVelocityVec.lengthSq();
-
     isDragging = false;
     HandleTapToSetLocation(event.clientX,event.clientY )
 }

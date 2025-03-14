@@ -9,16 +9,32 @@ html, body
    width: 100%;
    font-size:3vh;
    text-align: center;
-   background-image: url("./BGPattern.svg");
+   background-image: url("./Images/BGPattern.svg");
    background-size: cover; /* or contain */
    background-repeat: no-repeat;
    background-position: center;
    background-color: lightgray; /* Just for testing */
 }
 
+/*  PABLO... u can use this to make all buttons look like divs, so u can make ure own styles
+button
+ {
+  all: unset; 
+  display: inline-block; 
+  cursor: pointer;
+} */
+
 p
 {
     margin: 10vh 2vh;
+}
+
+img
+{
+  touch-action: none;  
+  user-select: none;  
+  -webkit-user-drag: none; 
+  pointer-events: none;
 }
 
 .toptext
@@ -78,6 +94,25 @@ textarea
   color: red;
 }
 
+#LinkToHereButton
+{
+  height: 6.5vh;
+  width:  6.5vh;
+  border-radius: 50%;
+  position: absolute;
+  top: 0%;   
+  left: 0%;
+  background-color: gray;
+  z-index: 200; 
+}
+
+#LinkToHereImage
+{
+  height: 100%;
+  width:  100%;
+}
+
+
 #map
 {
   overflow: hidden;
@@ -117,6 +152,7 @@ textarea
 
 .ArtistMarkerImage
 {
+  pointer-events: auto;
   height: 100%;
   width: 100%;
 } 

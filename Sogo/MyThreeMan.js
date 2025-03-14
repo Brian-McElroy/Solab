@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import {Update as UpdatePanZoom} from "./panzoom.js";
+import { iconFollowPoint } from "./MarkersMan.js";
 
 let debugtxt = document.getElementById("debugtxt");
 
@@ -69,6 +70,7 @@ function onResize() {
 
     // Update renderer size
     renderer.setSize(newWidth, newHeight);
+    requestAnimationFrame(iconFollowPoint);
 }
 
 window.addEventListener('resize', onResize);

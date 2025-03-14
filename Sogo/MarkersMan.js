@@ -58,7 +58,7 @@ function CreateMarkers(data)
         DOMmarkers.push(clone);
         clone.style.display = "block";  
         clone.artistIndex = i;
-        AddArtistImage(clone,markersData.Artists[i]);
+        AddArtistImage(clone.firstElementChild,markersData.Artists[i]);
         //SetInteraction(clone);
         node.appendChild(clone); 
     } 
@@ -108,6 +108,8 @@ function OpenArtistDetails(index)
     DetailsName.innerHTML = markersData.Artists[index].name;
     DetailsGenres.innerHTML = GenresToString(index);
     openArtistDetails = index;
+
+    AddArtistImage(document.getElementById("ArtistDetailsImage"),markersData.Artists[index]);
     requestAnimationFrame(iconFollowPoint);
 }
 
@@ -145,7 +147,7 @@ function AddArtistImage(node,artistdata)
 {
     if(typeof(artistdata.image) === "undefined") return;
     if(artistdata.image == null) return;
-    node.firstElementChild.src =artistdata.image;
+    node.src =artistdata.image;
 }
 
 export function ClickedHere(here)

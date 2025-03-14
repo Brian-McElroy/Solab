@@ -26,16 +26,23 @@ function RandomizeLocations()
 
 function SetData()
 {
-    let query = {weprweoriwpe:"23-4028-3_*&(*&)(^*(^*&^nfoiwfowioin.ewfpiwjefpowijeOIJOIUIUSHDIUSHDIHA"};
-    query.data = JSON.parse(document.getElementById("DataInputField").value);
+    let query = {
+        weprweoriwpe: "23-4028-3_*&(*&)(^*(^*&^nfoiwfowioin.ewfpiwjefpowijeOIJOIUIUSHDIUSHDIHA",
+        data: JSON.parse(document.getElementById("DataInputField").value)
+    };
 
-    $.get(
-        url + "ThingThree",
-        query,
-        function(data) {
-           alert(data);
+    $.ajax({
+        url: url + "ThingThree",
+        type: "POST",
+        contentType: "application/json",  // Set JSON content type
+        data: JSON.stringify(query),  // Convert object to JSON string
+        success: function(data) {
+            alert(data);
+        },
+        error: function(xhr) {
+            alert("Error: " + xhr.responseText);
         }
-    );
+    });
 }
 
 

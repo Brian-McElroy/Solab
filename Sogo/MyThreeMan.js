@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import {Update as UpdatePanZoom} from "./panzoom.js";
 
 let debugtxt = document.getElementById("debugtxt");
 
@@ -48,6 +49,7 @@ container.appendChild(renderer.domElement);
 function animate()
 {
     //iconFollowPoint();
+    UpdatePanZoom();
     renderer.render(scene, camera);
     //requestAnimationFrame(iconFollowPoint);
 }
@@ -108,8 +110,8 @@ botright.position.set(5,-1.8,0); // (x, y, z)
 
 export const topleftExtents = new THREE.Mesh( geometry, material );
 scene.add( topleftExtents );
-topleftExtents.position.set(-7,6,0); // (x, y, z)
+topleftExtents.position.set(-5,6,0); // (x, y, z)
 
 export const botrightExtents = new THREE.Mesh( geometry, material );
 scene.add( botrightExtents );
-botrightExtents.position.set(8,-4.8,0); // (x, y, z)
+botrightExtents.position.set(6,-5.5,0); // (x, y, z)

@@ -1,4 +1,6 @@
 
+import * as THREE from 'three';
+
 import { width } from "./MyThreeMan.js";
 import { height } from "./MyThreeMan.js";
 import { camera } from "./MyThreeMan.js";
@@ -12,14 +14,21 @@ let debugtxt = document.getElementById("debugtxt");
 
 // Controls
 let isDragging = false;
+let isTouching = false;
 let previousMousePosition = { x: 0, y: 0 };
 let startMousePosition = { x: 0, y: 0 };
 let currentMousePosition = { x: 0, y: 0 };
 let touchDistance = 0;
 let multitouch = false;
 
+const maxZoomIn = 0.05;
 const leeway = 0.065;
 
+const minVelocitySquared = 0.005;
+const minVelocityBeforeStopSquared = 0.00001;
+const friction = 1;
+
+let currentVelocityVec = new THREE.Vector2(0,0);
 // Touch
 //========================================
 
@@ -30,6 +39,8 @@ function getTouchDistance(touches) {
 }
 
 function onTouchStart(event) {
+    if (event.touches.length > 0) isTouching = true;
+
     if (event.touches.length > 1) multitouch = true;
 
     if (event.touches.length === 2) {
@@ -68,7 +79,12 @@ function onTouchEnd(event)
 {
     touchDistance = 0;
 
-    if (event.touches.length < 1) multitouch = false;
+
+    if (event.touches.length < 1)
+    {
+        isTouching = false;
+        multitouch = false;
+    } 
 
     if (event.touches.length === 1)
     {
@@ -96,6 +112,10 @@ function onMouseMove(event) {
     const deltaY = (event.clientY - previousMousePosition.y) / height * 2;
     camera.position.x -= deltaX * camera.right;
     camera.position.y += deltaY * camera.top;
+
+    currentVelocityVec = new THREE.Vector2(deltaX,deltaY);
+    DontSlideIfTooSlow();
+
     previousMousePosition = { x: event.clientX, y: event.clientY };
     clampCameraToExtents(camera,topleftExtents,botrightExtents);
     requestAnimationFrame(iconFollowPoint);
@@ -103,6 +123,8 @@ function onMouseMove(event) {
 
 function onMouseUp(event) 
 {
+    debugtxt.innerHTML = currentVelocityVec.lengthSq();
+
     isDragging = false;
     HandleTapToSetLocation(event.clientX,event.clientY )
 }
@@ -152,12 +174,34 @@ function isMouseUpInsideDiv(eventX,eventY)
     );
 }
 
+// Velocity
+//====================================================
+
+export function Update()
+{
+    return; // leaving this for now...
+    if(isDragging || isTouching || currentVelocityVec.lengthSq() <= minVelocityBeforeStopSquared)
+    {
+        currentVelocityVec == new THREE.Vector2(0,0);
+        return;
+    } 
+    camera.position.x -= currentVelocityVec.x * camera.right;
+    camera.position.y += currentVelocityVec.y * camera.top;
+
+    clampCameraToExtents(camera,topleftExtents,botrightExtents);
+    requestAnimationFrame(iconFollowPoint);
+}
+
+function DontSlideIfTooSlow()
+{
+    if(currentVelocityVec.lengthSq < minVelocitySquared) currentVelocityVec = new THREE.Vector2(0,0);
+}
+
 // Panzoom limits
+//====================================================
 
 function clampCameraToExtents(camera, topleft, botright)
  {
-    let maxZoomIn = 0.05;
-
     // Calculate available space in extents
     const maxWidth = botright.position.x - topleft.position.x;
     const maxHeight = topleft.position.y - botright.position.y;
@@ -194,11 +238,17 @@ function clampCameraToExtents(camera, topleft, botright)
     // Clamp X position
     const minX = topleft.position.x + width / 2;
     const maxX = botright.position.x - width / 2;
+
+    if(camera.position.x <= minX || camera.position.x >= maxX) currentVelocityVec= new THREE.Vector2(0,0);
+
     camera.position.x = Math.max(minX, Math.min(maxX, camera.position.x));
 
     // Clamp Y position
     const minY = botright.position.y + height / 2;
     const maxY = topleft.position.y - height / 2;
+
+    if(camera.position.y <= minY || camera.position.y >= maxY) currentVelocityVec= new THREE.Vector2(0,0);
+
     camera.position.y = Math.max(minY, Math.min(maxY, camera.position.y));
 
     // Update projection matrix

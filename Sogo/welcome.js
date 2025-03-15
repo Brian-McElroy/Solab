@@ -4,7 +4,7 @@ function WelcomeSetup()
 {
   const params = new URLSearchParams(window.location.search);
   let invitecode = params.get(inviteCodeKey);
-  let name = params.get(nameKey);
+  let name = decodeURI(params.get(nameKey));
 
   codeok = CheckCode(invitecode);
 

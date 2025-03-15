@@ -1,7 +1,7 @@
 
 
 
-function RetrieveID(key)
+function RetrieveID(key, decodeurl = false)
 {
     MyThing= localStorage.getItem(key);
     if(MyThing != null) return;
@@ -12,10 +12,12 @@ function RetrieveID(key)
     if(MyThing == null) return;
     //codeok = CheckCode(MyID);
 
+    if(decodeurl) MyThing = decodeURI(MyThing);
+
     localStorage.setItem(key, MyThing);  
 }
 
 
 RetrieveID(MyIDKey);
 RetrieveID(MyInviteKey);
-RetrieveID(MyNameKey);
+RetrieveID(MyNameKey,true);

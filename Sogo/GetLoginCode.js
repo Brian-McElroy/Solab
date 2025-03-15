@@ -1,17 +1,17 @@
 
 
-function GetInviteUrl()
+function GetLoginUrl()
 {
     let myid = localStorage.getItem(MyIDKey);
     let myinvite = localStorage.getItem(MyInviteKey);
     let myname = localStorage.getItem(MyNameKey);
 
-    return SiteUrl+"?"+MyIDKey+"="+myid+"&"+MyInviteKey+"="+myinvite+"&"+MyNameKey+"="+myname;
+    return SiteUrl+"?"+MyIDKey+"="+myid+"&"+MyInviteKey+"="+myinvite+"&"+MyNameKey+"="+encodeURI(myname);
 }
 
 function GetLinkPressed()
 {
-    navigator.clipboard.writeText(GetInviteUrl());
+    navigator.clipboard.writeText(GetLoginUrl());
     document.getElementById("copiedmessage").style.display ="block";
 }
 

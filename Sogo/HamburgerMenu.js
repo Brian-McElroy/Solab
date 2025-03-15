@@ -2,6 +2,7 @@
 let menuVisible =false;
 
 let menudiv = document.getElementById("HamburgerMenu");
+let hambutton = document.getElementById("HamburgerButton");
 
 function ToggleMenu()
 {
@@ -24,14 +25,8 @@ function GotoReorderFriends()
     window.location = "Artist_Order_Friends.html"
 }
 
-let hambutton = document.getElementById("HamburgerButton");
-
-console.log("fuck!! "+localStorage.getItem(MyIDKey));
-
 if(localStorage.getItem(MyIDKey) != null) 
 {
-    console.log("not null somehow!!");
-
     hambutton.style.display = "block";
     hambutton.onclick = ToggleMenu;
     document.getElementById("GotoGetLink").onclick = GotoGetInvite;
@@ -39,6 +34,9 @@ if(localStorage.getItem(MyIDKey) != null)
     document.getElementById("GotoReorderFriends").onclick = GotoReorderFriends;
 }
 
-
-
-
+document.addEventListener('click', function(event) {
+if (menuVisible && !menudiv.contains(event.target) && !hambutton.contains(event.target))
+{
+    ToggleMenu();
+}
+});

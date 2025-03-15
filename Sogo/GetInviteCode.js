@@ -1,7 +1,7 @@
 let gotInviteCode = false;
 let MyInviteCode;
-let MyID;
 let MyName;
+let MyThing;
 
 function RegisterOnServer(url)
 {
@@ -33,12 +33,13 @@ function RegisterOnServer(url)
 
 function HandleRegistrySuccess(data)
 {
-    MyID = data.id;
+    MyThing = data.id;
     MyInviteCode = data.invite;
-    localStorage.setItem(MyIDKey,MyID);
+    localStorage.setItem(MyIDKey,MyThing);
     localStorage.setItem(MyInviteKey,MyInviteCode);
     localStorage.setItem(MyNameKey,MyName);
-    document.getElementById('OkButton').innerHTML = GetInviteUrl();
+    document.getElementById("CopyLinkButton").style.display ="block";
+    //document.getElementById('OkButton').innerHTML = GetInviteUrl();
     gotInviteCode = true;
 }
 
@@ -52,12 +53,30 @@ function getArtistName(url) {
     return match ? match[1] : null;
 }
 
-function OkPressed()
+function RetrieveSavedInviteCode()
+{
+    MyName = localStorage.getItem(MyNameKey);
+    MyInviteCode = localStorage.getItem(MyInviteKey);
+    document.getElementById("CopyLinkButton").style.display ="block";
+    document.getElementById("OkButton").style.display ="block";
+    gotInviteCode = true;
+}
+
+function GetLinkPressed()
 {
     if(!gotInviteCode) return;
     navigator.clipboard.writeText(GetInviteUrl());
+    document.getElementById("copiedmessage").style.display ="block";
+    document.getElementById("OkButton").style.display ="block";
+}
+
+function OkPressed()
+{
     window.location = "index.html"
 }
 
+document.getElementById("CopyLinkButton").onclick = GetLinkPressed;
 document.getElementById("OkButton").onclick = OkPressed;
-RegisterOnServer();
+
+if(localStorage.getItem(MyIDKey) === null) RegisterOnServer();
+else RetrieveSavedInviteCode();

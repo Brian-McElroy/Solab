@@ -1,18 +1,21 @@
 
-let myid;
 
-function RetrieveID()
+
+function RetrieveID(key)
 {
-    myid = localStorage.getItem(MyIDKey);
-    if(myid != null) return;
+    MyThing= localStorage.getItem(key);
+    if(MyThing != null) return;
 
     const params = new URLSearchParams(window.location.search);
-    myid = params.get(MyIDKey);
+    MyThing = params.get(key);
 
-    codeok = CheckCode(myid);
+    if(MyThing == null) return;
+    //codeok = CheckCode(MyID);
 
-    if(codeok) localStorage.setItem(MyIDKey, myid);    
+    localStorage.setItem(key, MyThing);  
 }
 
 
-RetrieveID();
+RetrieveID(MyIDKey);
+RetrieveID(MyInviteKey);
+RetrieveID(MyNameKey);

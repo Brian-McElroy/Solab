@@ -89,9 +89,22 @@ textarea
   transform: translateX(-50%);
 }
 
+#CopyLinkButton
+{
+  position: absolute;
+  bottom: 14vh;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 #error
 {
   color: red;
+}
+
+#copiedmessage
+{
+  color: rgb(32, 151, 8);
 }
 
 #LinkToHereButton
@@ -106,12 +119,46 @@ textarea
   z-index: 200; 
 }
 
-#LinkToHereImage
+#HamburgerButton
+{
+  height: 6.5vh;
+  width:  6.5vh;
+  border-radius: 50%;
+  position: absolute;
+  top: 0%;   
+  left: 100%;
+  background-color: rgb(255, 255, 255);
+  z-index: 300; 
+  transform: translateX(-100%);
+}
+
+#HamburgerMenu
+{
+  position: absolute; 
+  top: 0;
+  left: 100%;
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  z-index: 200; 
+  background-color: rgb(54, 54, 54);
+  transform: translateX(-100%);
+  padding: 1vh 0vh;
+  padding-top: 6.5vh;
+}
+
+.hamburgerLink
+{
+  min-width: 20vh;
+  font-size:2vh;
+  margin: 1vh 0vh;
+}
+
+.ButtonImage
 {
   height: 100%;
   width:  100%;
 }
-
 
 #map
 {

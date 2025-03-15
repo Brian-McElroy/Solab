@@ -21,10 +21,17 @@
 		<script type="module" src="panzoom.js"></script>
 		<script type="module" src="LinesMan.js"></script>
 		<script type="module" src="NativeShare.js"></script>
+		<script type="module" src="HamburgerMenu.js"></script>
 	</head>
 	<body>
 	<p id="debugtxt"></p>
-	<button id="LinkToHereButton" type="button"><img id="LinkToHereImage" src="./Images/link.svg" ></button> 	
+	<button id="LinkToHereButton" type="button"><img class="ButtonImage" src="./Images/link.svg" ></button> 
+	<button style="display: none;" id="HamburgerButton" type="button"><img class="ButtonImage" src="./Images/hamburger-menu.svg" ></button> 
+	<div style="display: none;" id="HamburgerMenu">
+		<button class="hamburgerLink" id="GotoGetLink" type="button">Get invite link</button> 
+		<button class="hamburgerLink" id="GotoReorderFriends" type="button">Re-order friends</button>
+		<button class="hamburgerLink" id="GotogetMyId" type="button">Get my login</button>
+	</div>	
 	<div id="map">
 		<div style="display: none;" class="ArtistMarker"><img class="ArtistMarkerImage" src="./Images/user.jpg" ></div>
 		<div style="display: none;" id="ArtistInfo">

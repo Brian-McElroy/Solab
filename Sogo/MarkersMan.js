@@ -145,6 +145,7 @@ function CloseArtistDetails(index)
 
 function AddArtistImage(node,artistdata)
 {
+    node.src = "./Images/user.jpg";
     if(typeof(artistdata.image) === "undefined") return;
     if(artistdata.image == null) return;
     node.src =artistdata.image;

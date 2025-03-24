@@ -4,18 +4,13 @@ import { Line2 } from 'three/addons/lines/Line2.js';
 import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
 import { LineGeometry } from 'three/addons/lines/LineGeometry.js';
 
-
-
 import { scene} from "./MyThreeMan.js";
+import { markersData} from "./MarkersMan.js";
+import { topleft } from "./MyThreeMan.js";
+import { botright } from "./MyThreeMan.js";
 
 
-// Define line points
-const LTpositions = [ 0, 0, 0,  10, 10, 10 ]; // [x1, y1, z1, x2, y2, z2]
-
-// Create Line Geometry
-const LTgeometry = new LineGeometry();
-LTgeometry.setPositions(LTpositions);
-
+const LineZ = 1;
 // Create Line Material (important: set resolution for linewidth to work)
 const LTmaterial = new LineMaterial({
   color: 0xff0000,
@@ -23,8 +18,68 @@ const LTmaterial = new LineMaterial({
   resolution: new THREE.Vector2(window.innerWidth, window.innerHeight), // Required
 });
 
-// Create Line2 object and add to scene
-const line = new Line2(LTgeometry, LTmaterial);
-line.computeLineDistances(); // Required for dashed lines (even if not using dashes)
-scene.add(line);
+let currentLines =[];
+
+
+export function ArtistSelected(artist)
+{
+    ClearLines();
+
+    let count =0;
+    for (const element of artist.friends)
+    {
+      CreateLine(artist.location,markersData.Artists[element].location);
+      count++;
+      if(count > 4) break;
+    }
+}
+
+export function NoOneSelected()
+{
+  ClearLines();
+}
+
+export function UpdateLines()
+{
+
+}
+
+//====================
+
+function ClearLines()
+{
+  for (const element of currentLines)
+  {
+    scene.remove(element);
+  }
+  currentLines =[];
+}
+
+function LerpX(ratio)
+{
+  return MylerpUnclamped(topleft.position.x,botright.position.x,ratio)
+}
+
+function LerpY(ratio)
+{
+  return MylerpUnclamped(topleft.position.y,botright.position.y,ratio)
+}
+
+function CreateLine(pointA,pointB)
+{
+  // Define line points
+  let LTpositions = [ LerpX(pointA[0]), LerpY(pointA[1]), LineZ ,  LerpX(pointB[0]), LerpY(pointB[1]), LineZ  ]; // [x1, y1, z1, x2, y2, z2]
+
+  //let LTpositions = [ -5,6,1,6,-5.5,1  ]; // [x1, y1, z1, x2, y2, z2]
+
+  // Create Line Geometry
+  let LTgeometry = new LineGeometry();
+  LTgeometry.setPositions(LTpositions);
+
+  // Create Line2 object and add to scene
+  let line = new Line2(LTgeometry, LTmaterial);
+  line.computeLineDistances(); // Required for dashed lines (even if not using dashes)
+  scene.add(line);
+  currentLines.push(line);
+}
 

@@ -3,6 +3,9 @@ import { camera } from "./MyThreeMan.js";
 import { topleft } from "./MyThreeMan.js";
 import { botright } from "./MyThreeMan.js";
 import { container} from "./MyThreeMan.js";
+import { NoOneSelected} from "./LinesMan.js";
+import { ArtistSelected} from "./LinesMan.js";
+import { UpdateLines} from "./LinesMan.js";
 //import { LocationPicked } from "./setlocation.js";
 
 export let markersData;
@@ -111,6 +114,7 @@ function OpenArtistDetails(index)
 
     AddArtistImage(document.getElementById("ArtistDetailsImage"),markersData.Artists[index]);
     requestAnimationFrame(iconFollowPoint);
+    ArtistSelected(markersData.Artists[index]);
 }
 
 function DetailsGotoBCClicked()
@@ -123,6 +127,7 @@ function DetailsGotoBCClicked()
 
 function DetailsHereLinkClicked()
 {
+    console.log("not done yet!! - Brian");
 }
 
 
@@ -141,6 +146,7 @@ function CloseArtistDetails(index)
 {
     details.style.display = "none"; 
     openArtistDetails = null;
+    NoOneSelected();
 }
 
 function AddArtistImage(node,artistdata)

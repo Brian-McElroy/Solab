@@ -51,6 +51,38 @@ function GetData()
     );
 }
 
+function CreateFakeData()
+{
+    markersData= {Artists:[]};
+
+    const maxartists =500;
+
+    for (let index = 0; index < maxartists; index++)
+    {
+        markersData.Artists.push(CreateFakeArtist(maxartists));       
+    }
+    CreateMarkers(markersData);
+    requestAnimationFrame(iconFollowPoint);
+}  
+
+function CreateFakeArtist(maxartists)
+{
+    let artist = {};
+    artist.location = [Math.random(),Math.random()];
+    artist.featured = (Math.random() < 0.1);
+    artist.friends = [];
+    artist.genres =[];
+
+    const numfriends = Math.floor(Math.random() * 5);
+
+    for (let index = 0; index < numfriends; index++)
+    {
+        artist.friends.push(Math.floor(Math.random() * maxartists))      
+    }
+
+    return artist;
+}
+
 function CreateMarkers(data)
 {
     const node = document.getElementById("map");
@@ -231,7 +263,8 @@ function DivToWorldSpace(screenPos) {
     return ndcPoint;
 }
 
-GetData();
+//GetData();
+CreateFakeData();
 SetInteraction(container);
 
 

@@ -6,10 +6,15 @@ import { container} from "./MyThreeMan.js";
 import { NoOneSelected} from "./LinesMan.js";
 import { ArtistSelected} from "./LinesMan.js";
 import { UpdateLines} from "./LinesMan.js";
+import { DecideWhichToShow} from "./MarkerColliderHandler.js";
+import {ColliderStart} from "./MarkerColliderHandler.js";
+import {ColliderArtistSelected} from "./MarkerColliderHandler.js";
+import {ColliderArtistDeSelected} from "./MarkerColliderHandler.js";
 //import { LocationPicked } from "./setlocation.js";
 
+
 export let markersData;
-let DOMmarkers = [];
+export let DOMmarkers = [];
 export let openArtistDetails = null;
 let startX, startY;
 let isDragging = false;
@@ -73,7 +78,7 @@ function CreateFakeArtist(maxartists)
     artist.friends = [];
     artist.genres =[];
 
-    const numfriends = Math.floor(Math.random() * 5);
+    const numfriends = Math.floor(Math.random() * 9)+1;
 
     for (let index = 0; index < numfriends; index++)
     {
@@ -99,6 +104,7 @@ function CreateMarkers(data)
     } 
 
     node.firstElementChild.remove();
+    ColliderStart();
 }
 
 function SetInteraction(div)
@@ -145,6 +151,7 @@ function OpenArtistDetails(index)
     openArtistDetails = index;
 
     AddArtistImage(document.getElementById("ArtistDetailsImage"),markersData.Artists[index]);
+    ColliderArtistSelected(markersData.Artists[index]);
     requestAnimationFrame(iconFollowPoint);
     ArtistSelected(markersData.Artists[index]);
 }
@@ -178,6 +185,7 @@ function CloseArtistDetails(index)
 {
     details.style.display = "none"; 
     openArtistDetails = null;
+    ColliderArtistDeSelected();
     NoOneSelected();
 }
 
@@ -211,6 +219,7 @@ export function iconFollowPoint()
     {
         for (let i = 0; i < markersData.Artists.length; i++)
         {
+            if(DOMmarkers[i].display =="none") continue;
             DrawOneIcon(DOMmarkers[i],LerpPos(markersData.Artists[i].location));
         } 
         if(openArtistDetails != null) DrawOneIcon(details,LerpPos(markersData.Artists[openArtistDetails].location));
@@ -223,7 +232,7 @@ export function iconFollowPoint()
     return;
 }   
 
-function LerpPos(location)
+export function LerpPos(location)
 {
     let vec = new THREE.Vector3(MylerpUnclamped(topleft.position.x,botright.position.x,location[0])
     ,MylerpUnclamped(topleft.position.y,botright.position.y,location[1]), markerZ);
@@ -241,7 +250,7 @@ function DrawOneIcon(icon,worldpos)
 // Transformations
 //===================================================
 
-function worldToDivSpace(point3D)
+export function worldToDivSpace(point3D)
  {
     // Clone the point to avoid modifying the original
     if (!point3D) return;

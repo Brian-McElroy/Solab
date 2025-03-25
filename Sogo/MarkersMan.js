@@ -217,6 +217,8 @@ export function iconFollowPoint()
 {
     if( typeof MainMapPage !== 'undefined') 
     {
+        DecideWhichToShow();
+
         for (let i = 0; i < markersData.Artists.length; i++)
         {
             if(DOMmarkers[i].display =="none") continue;
@@ -227,6 +229,7 @@ export function iconFollowPoint()
 
     if( typeof setlocationPage !== 'undefined') 
     {
+        if(tappedPos == null) return;
         DrawOneIcon(icon,tappedPos)
     }
     return;
@@ -280,13 +283,15 @@ function DivToWorldSpace(screenPos) {
     return ndcPoint;
 }
 
-//GetData();
-CreateFakeData();
+
 SetInteraction(container);
 
 
 if( typeof MainMapPage !== 'undefined')
 {
+    //GetData();
+    CreateFakeData();
+
     DetailsBCLink.onclick = DetailsGotoBCClicked;
     DetailsHereLink.onclick = DetailsHereLinkClicked;
 }

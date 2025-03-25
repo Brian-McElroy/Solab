@@ -9,7 +9,6 @@ import { markersData} from "./MarkersMan.js";
 import { topleft } from "./MyThreeMan.js";
 import { botright } from "./MyThreeMan.js";
 
-const MaxFriendLines = 5;
 const LineZ = 1;
 
 const LTmaterial = new LineMaterial({
@@ -29,7 +28,7 @@ export function ArtistSelected(artist)
     {
       CreateLine(artist.location,markersData.Artists[element].location);
       count++;
-      if(count >= MaxFriendLines) break;
+      if(count >= TopFriendsNum) break;
     }
 }
 

@@ -13,6 +13,8 @@ const MyIDKey ="MyID"
 const MyInviteKey ="MyInvite"
 const MyGenresKey ="mygenres"
 
+const TopFriendsNum =5;
+
 function CheckCode(invitecode)
 {
   if(invitecode == null) return false;

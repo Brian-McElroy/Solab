@@ -2,8 +2,9 @@
 import { markersData} from "./MarkersMan.js";
 import { DOMmarkers} from "./MarkersMan.js";
 import { LerpPos} from "./MarkersMan.js";
-import { worldToDivSpace} from "./MarkersMan.js";
+import { worldToPixelSpace} from "./MarkersMan.js";
 
+const markerDiameter = 0.055;
 
 let priorityList =[];
 
@@ -20,17 +21,18 @@ export function ColliderStart()
     }
 }
 
-export function ColliderArtistSelected(artist)
+export function ColliderArtistSelected(artindex)
 {
     for (const element of DOMmarkers)
     {
         let show = false;
         //if(element.artistIndex == artindex) show = true;
-        if(artist.friends.includes(element.artistIndex)) show = true;
-
+        if(markersData.Artists[artindex].friends.includes(element.artistIndex)) show = true;
         GetItemWithThisIndex(element.artistIndex).visible = show;
     }
     DecideWhichToShow();
+
+    console.log(GetItemWithThisIndex(artindex).position);
 }
 
 export function ColliderArtistDeSelected()
@@ -44,13 +46,23 @@ export function ColliderArtistDeSelected()
 export function DecideWhichToShow()
 {
     SetPositions();
+    CheckOutOfView();
     priorityList.sort((a, b) => b.priority - a.priority);
 
     for (let i = 0; i < priorityList.length; i++)
     {
         if(!priorityList[i].visible) continue;
         
-
+        for (let j = 0; j < priorityList.length; j++)
+        {
+            if(i == j) continue;
+            if(!priorityList[j].visible) continue;
+            
+            if(overlaps(priorityList[i],priorityList[j]))
+            {
+                priorityList[j].visible = false;
+            }        
+        }
         
     }
 
@@ -60,16 +72,22 @@ export function DecideWhichToShow()
 
 //===========================================================
 
-function overlaps()
+function overlaps(top, bot)
 {
-    
+
+    return false;
+}
+
+function CheckOutOfView()
+{
+    // TODO!!!!!!!!!!
 }
 
 function SetPositions()
 {
     for (const element of priorityList)
     {
-
+        element.position =  worldToPixelSpace(LerpPos(markersData.Artists[element.index].location));
     }
 }
 

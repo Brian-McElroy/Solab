@@ -183,6 +183,11 @@ textarea
   border-radius: 50%;
 } 
 
+#markerdebug
+{
+  color: red;
+}
+
 .ArtistMarker
 {
   touch-action: none;  /* Prevent touch-based dragging */

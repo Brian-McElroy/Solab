@@ -151,7 +151,7 @@ function OpenArtistDetails(index)
     openArtistDetails = index;
 
     AddArtistImage(document.getElementById("ArtistDetailsImage"),markersData.Artists[index]);
-    ColliderArtistSelected(markersData.Artists[index]);
+    ColliderArtistSelected(index);
     requestAnimationFrame(iconFollowPoint);
     ArtistSelected(markersData.Artists[index]);
 }
@@ -258,6 +258,14 @@ export function worldToDivSpace(point3D)
     const x = (projected.x * 0.5 + 0.5) ;
     const y = (1 - (projected.y * 0.5 + 0.5)); // Flip Y for screen coordinates
     return { x, y };
+}
+
+export function worldToPixelSpace(point3D)
+{
+    let divspace = worldToDivSpace(point3D)
+    divspace.x *= container.clientWidth;
+    divspace.y *= container.clientHeight;
+    return divspace;
 }
 
 function DivToWorldSpace(screenPos) {

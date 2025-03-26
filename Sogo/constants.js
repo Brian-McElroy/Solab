@@ -1,6 +1,6 @@
 const ServerUrl = "http://localhost:7005";
 //const ServerUrl = "https://solab-access-438f80e69184.herokuapp.com";
-const SiteUrl ="http://127.0.0.1:5500/Sogo/"
+let SiteUrl;
 const OverrideMobileOnly = true;
 
 
@@ -12,6 +12,7 @@ const MyNameKey ="myname"
 const MyIDKey ="MyID"
 const MyInviteKey ="MyInvite"
 const MyGenresKey ="mygenres"
+const ArtistKey ="artist"
 
 const TopFriendsNum =5;
 
@@ -31,3 +32,15 @@ function MylerpUnclamped(start, end, t)
 {
   return start + (end - start) * t;
 }
+
+function GetSiteUrl()
+{
+  SiteUrl = getBaseURL(window.location.href);
+}
+
+function getBaseURL(url)
+{
+  return url.replace(/\/[^\/]*$/, '/');
+}
+
+GetSiteUrl();

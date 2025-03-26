@@ -10,12 +10,14 @@ import { DecideWhichToShow} from "./MarkerColliderHandler.js";
 import {ColliderStart} from "./MarkerColliderHandler.js";
 import {ColliderArtistSelected} from "./MarkerColliderHandler.js";
 import {ColliderArtistDeSelected} from "./MarkerColliderHandler.js";
+import {GotoPoint} from "./panzoom.js";
 //import { LocationPicked } from "./setlocation.js";
 
 
 export let markersData;
 export let DOMmarkers = [];
 export let openArtistDetails = null;
+let DirectlyLinkedArtistName;
 let startX, startY;
 let isDragging = false;
 
@@ -34,6 +36,11 @@ export let ChoseLocationFunction;
 export function setChoseLocationFunction(fn)
 {
     ChoseLocationFunction = fn;
+}
+
+export function SetDirectlyLinkedArtistName(name)
+{
+    DirectlyLinkedArtistName = name;
 }
 
 //  Markers
@@ -105,6 +112,22 @@ function CreateMarkers(data)
 
     node.firstElementChild.remove();
     ColliderStart();
+    OpenDirect();
+}
+
+function OpenDirect()
+{
+    if(DirectlyLinkedArtistName == null) return;
+
+    for (let i = 0; i< markersData.Artists.length; i++)
+    {
+        if(markersData.Artists[i].name == DirectlyLinkedArtistName)
+        {
+            OpenArtistDetails(i);
+            GotoPoint(LerpPos(markersData.Artists[i].location));
+            break;
+        }       
+    }
 }
 
 function SetInteraction(div)
@@ -289,8 +312,8 @@ SetInteraction(container);
 
 if( typeof MainMapPage !== 'undefined')
 {
-    //GetData();
-    CreateFakeData();
+    GetData();
+    //CreateFakeData();
 
     DetailsBCLink.onclick = DetailsGotoBCClicked;
     DetailsHereLink.onclick = DetailsHereLinkClicked;

@@ -145,3 +145,5 @@ function GetMarkerDiameter()
     markerDiameter = document.getElementById("ArtistMarker").clientHeight;
     //console.log(document.getElementById("ArtistMarker").clientHeight);  
 }
+
+window.addEventListener('resize', GetMarkerDiameter);

@@ -65,19 +65,26 @@ function LerpY(ratio)
 
 function CreateLine(pointA,pointB)
 {
-  // Define line points
-  let LTpositions = [ LerpX(pointA[0]), LerpY(pointA[1]), LineZ ,  LerpX(pointB[0]), LerpY(pointB[1]), LineZ  ]; // [x1, y1, z1, x2, y2, z2]
+  try 
+  {
+      // Define line points
+    let LTpositions = [ LerpX(pointA[0]), LerpY(pointA[1]), LineZ ,  LerpX(pointB[0]), LerpY(pointB[1]), LineZ  ]; // [x1, y1, z1, x2, y2, z2]
 
-  //let LTpositions = [ -5,6,1,6,-5.5,1  ]; // [x1, y1, z1, x2, y2, z2]
+    //let LTpositions = [ -5,6,1,6,-5.5,1  ]; // [x1, y1, z1, x2, y2, z2]
 
-  // Create Line Geometry
-  let LTgeometry = new LineGeometry();
-  LTgeometry.setPositions(LTpositions);
+    // Create Line Geometry
+    let LTgeometry = new LineGeometry();
+    LTgeometry.setPositions(LTpositions);
 
-  // Create Line2 object and add to scene
-  let line = new Line2(LTgeometry, LTmaterial);
-  line.computeLineDistances(); // Required for dashed lines (even if not using dashes)
-  scene.add(line);
-  currentLines.push(line);
+    // Create Line2 object and add to scene
+    let line = new Line2(LTgeometry, LTmaterial);
+    line.computeLineDistances(); // Required for dashed lines (even if not using dashes)
+    scene.add(line);
+    currentLines.push(line);
+  }
+  catch
+  {
+
+  }
 }
 

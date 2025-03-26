@@ -21,7 +21,7 @@ let currentMousePosition = { x: 0, y: 0 };
 let touchDistance = 0;
 let multitouch = false;
 
-const maxZoomIn = 0.05;
+const maxZoomIn = 0.02; // 0.05;
 const leeway = 0.065;
 
 const minVelocitySquared = 0.005;
@@ -171,6 +171,18 @@ function isMouseUpInsideDiv(eventX,eventY)
         eventY <= rect.bottom
     );
 }
+
+// Goto point
+//====================================================
+
+export function GotoPoint(point)
+{
+    camera.position.x = point.x;
+    camera.position.y = point.y;
+    clampCameraToExtents(camera,topleftExtents,botrightExtents);
+    requestAnimationFrame(iconFollowPoint);
+}
+
 
 // Velocity
 //====================================================

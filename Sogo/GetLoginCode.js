@@ -1,6 +1,6 @@
 
 
-function GetLoginUrl()
+function GetInviteUrl()
 {
     let myid = localStorage.getItem(MyIDKey);
     let myinvite = localStorage.getItem(MyInviteKey);
@@ -11,7 +11,7 @@ function GetLoginUrl()
 
 function GetLinkPressed()
 {
-    navigator.clipboard.writeText(GetLoginUrl());
+    navigator.clipboard.writeText(GetInviteUrl());
     document.getElementById("copiedmessage").style.display ="block";
 }
 

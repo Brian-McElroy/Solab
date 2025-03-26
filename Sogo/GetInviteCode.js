@@ -43,9 +43,9 @@ function HandleRegistrySuccess(data)
     gotInviteCode = true;
 }
 
-function GetLoginUrl()
+function GetInviteUrl()
 {
-    return SiteUrl+"?invite="+ MyInviteCode+"&name="+encodeURI(MyName);
+    return SiteUrl+"Welcome.html?invite="+ MyInviteCode+"&name="+encodeURI(MyName);
 }
 
 function getArtistName(url) {
@@ -65,7 +65,7 @@ function RetrieveSavedInviteCode()
 function GetLinkPressed()
 {
     if(!gotInviteCode) return;
-    navigator.clipboard.writeText(GetLoginUrl());
+    navigator.clipboard.writeText(GetInviteUrl());
     document.getElementById("copiedmessage").style.display ="block";
     document.getElementById("OkButton").style.display ="block";
 }

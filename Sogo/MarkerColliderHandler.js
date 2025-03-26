@@ -12,6 +12,8 @@ export function ColliderStart()
 {
     GetMarkerDiameter();
 
+    let myname = localStorage.getItem(MyNameKey);
+
     for (let index = 0; index < markersData.Artists.length; index++)
     {
         let data ={};
@@ -21,6 +23,9 @@ export function ColliderStart()
         data.unobscured =true;
         if(markersData.Artists[index].featured) data.priority = 150;
         else data.priority = Math.random()*100;
+
+        if(myname!= null && markersData.Artists[index].name == myname) data.priority = 200;
+
         priorityList.push(data);
     }
 }

@@ -11,3 +11,4 @@ function HandleDirectLink()
 }
 
 HandleDirectLink();
+window.history.replaceState({}, "", window.location.pathname);

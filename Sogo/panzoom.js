@@ -22,6 +22,7 @@ let touchDistance = 0;
 let multitouch = false;
 
 const maxZoomIn = 0.02; // 0.05;
+const maxZoomInSetLoc = 0.05;
 const leeway = 0.065;
 
 const minVelocitySquared = 0.005;
@@ -225,9 +226,16 @@ function clampCameraToExtents(camera, topleft, botright)
     const zoomOutY = maxHeight / height;
     const maxZoomOut = Math.min(zoomOutX, zoomOutY);
 
+    let maxzoominamount = maxZoomIn;
+
+    if( typeof setlocationPage !== 'undefined')
+    {
+        maxzoominamout = maxZoomInSetLoc;
+    }
+
     // Determine max zoom in limit (arbitrary limit)
-    const minWidth = maxWidth * maxZoomIn;
-    const minHeight = maxHeight * maxZoomIn;
+    const minWidth = maxWidth * maxzoominamount;
+    const minHeight = maxHeight * maxzoominamount;
     const zoomInX = minWidth / width;
     const zoomInY = minHeight / height;
     const maxZoomInFactor = Math.max(zoomInX, zoomInY); // Ensures it doesn't zoom in past the limit

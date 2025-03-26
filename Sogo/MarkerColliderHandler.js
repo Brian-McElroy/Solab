@@ -101,8 +101,9 @@ function CheckOutOfView()
     let screen = {top:0,bot:container.clientHeight,left:0,right:container.clientWidth};
     for (const el of priorityList)
     {
-        let icon = BoxFromPoint(el);
-        el.inview = CheckBoxIntersects(screen,icon);
+        el.inview = true;
+        //let icon = BoxFromPoint(el);
+        //el.inview = CheckBoxIntersects(screen,icon);
     }
 }
 

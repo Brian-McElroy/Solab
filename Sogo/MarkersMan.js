@@ -240,6 +240,8 @@ export function iconFollowPoint()
 {
     if( typeof MainMapPage !== 'undefined') 
     {
+        if(markersData == null) return;
+
         DecideWhichToShow();
 
         for (let i = 0; i < markersData.Artists.length; i++)

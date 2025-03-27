@@ -11,6 +11,9 @@ import {ColliderStart} from "./MarkerColliderHandler.js";
 import {ColliderArtistSelected} from "./MarkerColliderHandler.js";
 import {ColliderArtistDeSelected} from "./MarkerColliderHandler.js";
 import {GotoPoint} from "./panzoom.js";
+import {HandleIncomingFriendRequests} from "./FriendRequestNotifier.js";
+import {HandleFriendButtons} from "./FriendRequestNotifier.js";
+
 //import { LocationPicked } from "./setlocation.js";
 
 
@@ -28,6 +31,8 @@ let DetailsName = document.getElementById("DetailsName");
 let DetailsGenres = document.getElementById("DetailsGenres");
 let DetailsBCLink = document.getElementById("DetailsBandCampLink");
 let DetailsHereLink = document.getElementById("DetailsHereLink");
+
+
 
 const markerZ = 0;
 let tappedPos;
@@ -50,14 +55,17 @@ function GetData()
 {
     if( typeof MainMapPage === 'undefined') return;
 
+
+
     $.get(
         ServerUrl + "/GetArtistData",
-        {},
+        {id:localStorage.getItem(MyIDKey)},
         function(data)
         {
             markersData = data;
             //debugtxt.innerHTML = JSON.stringify(markersData);
             CreateMarkers(data);
+            HandleIncomingFriendRequests(data);
             requestAnimationFrame(iconFollowPoint);
         }
     );
@@ -115,7 +123,7 @@ function CreateMarkers(data)
     OpenDirect();
 }
 
-function OpenDirect()
+export function OpenDirect()
 {
     if(DirectlyLinkedArtistName == null) return;
 
@@ -175,6 +183,7 @@ function OpenArtistDetails(index)
 
     AddArtistImage(document.getElementById("ArtistDetailsImage"),markersData.Artists[index]);
     ColliderArtistSelected(index);
+    HandleFriendButtons(index);
     requestAnimationFrame(iconFollowPoint);
     ArtistSelected(markersData.Artists[index]);
 }

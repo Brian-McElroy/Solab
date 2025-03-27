@@ -65,6 +65,9 @@ function LerpY(ratio)
 
 function CreateLine(pointA,pointB)
 {
+  if(!CheckPointOk(pointA)) return;
+  if(!CheckPointOk(pointB)) return;
+
   try 
   {
       // Define line points
@@ -86,5 +89,14 @@ function CreateLine(pointA,pointB)
   {
 
   }
+}
+
+function CheckPointOk(point)
+{
+  if(point == undefined) return false;
+  if(point == null) return false;
+  if(point.length < 2) return false;
+
+  return true;
 }
 

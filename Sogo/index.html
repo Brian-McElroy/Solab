@@ -25,6 +25,7 @@
 		<script type="module" src="MarkerColliderHandler.js"></script>
 		<script type="module" src="ArtistDirectLink.js"></script>
 		<script type="module" src="RequestFriend.js"></script>
+		<script type="module" src="FriendRequestNotifier.js"></script>
 	</head>
 	<body>
 	<p id="debugtxt"></p>
@@ -35,6 +36,10 @@
 		<button class="hamburgerLink" id="GotoReorderFriends" type="button">Re-order friends</button>
 		<button class="hamburgerLink" id="GotogetMyId" type="button">Get my login</button>
 	</div>	
+	<div style="display: none;" id="FriendRequestList">
+		<p>You got a friend request!</p>
+		<button  id="OneFriendRequest"class="OneFriendRequest">Friend Request Artist</button>
+	</div>
 	<div id="map">
 		<div style="display: none;" id="ArtistMarker" class="ArtistMarker"><img class="ArtistMarkerImage" src="./Images/user.jpg" ></div>
 		<div style="display: none;" id="ArtistInfo">
@@ -45,6 +50,8 @@
 			<button id="DetailsBandCampLink" type="button">bandcamp Link</button> 
 			<button id="DetailsHereLink" type="button">Here link</button> 
 			<button id="FriendMe" type="button"><3</button> 
+			<button id="AcceptFriend" type="button">yes</button> 
+			<button id="DenyFriend" type="button">no</button> 
 		</div>
 	</div>
 	<iframe style="display: none;" id="MusicPlayer" src="" seamless><a href=""></a></iframe>

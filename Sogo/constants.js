@@ -1,5 +1,5 @@
-const ServerUrl = "http://localhost:7005";
-//const ServerUrl = "https://solab-access-438f80e69184.herokuapp.com";
+//const ServerUrl = "http://localhost:7005";
+const ServerUrl = "https://solab-access-438f80e69184.herokuapp.com";
 let SiteUrl;
 const OverrideMobileOnly = true;
 

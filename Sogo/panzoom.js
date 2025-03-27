@@ -281,3 +281,11 @@ window.addEventListener('wheel', onWheel, { passive: false });
 window.addEventListener('touchstart', onTouchStart, { passive: false });
 window.addEventListener('touchmove', onTouchMove, { passive: false });
 window.addEventListener('touchend', onTouchEnd);
+
+
+document.querySelectorAll("button").forEach(button => {
+    button.addEventListener("touchstart", function(event) {
+        event.preventDefault(); // Prevent unintended double events
+        this.click(); // Manually trigger a click event
+    });
+});

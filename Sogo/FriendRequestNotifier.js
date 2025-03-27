@@ -93,13 +93,16 @@ export function HandleFriendButtons(index)
 {
     if (localStorage.getItem(MyIDKey) == null)
     {
-        friendbutton.style.display = "none";
+        FriendMe.style.display = "none";
         AcceptFriend.style.display = "none";
         DenyFriend.style.display = "none";
         return;
     }
 
     let name = markersData.Artists[index].name;
+
+    if(markersData.YourFriendRequests == undefined) markersData.YourFriendRequests =[];
+    if(markersData.FriendRequests == undefined) markersData.FriendRequests =[];
 
     if(markersData.YourFriendRequests.includes(name))
     {

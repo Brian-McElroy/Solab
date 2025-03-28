@@ -1,5 +1,5 @@
-//const ServerUrl = "http://localhost:7005";
-const ServerUrl = "https://solab-access-438f80e69184.herokuapp.com";
+const ServerUrl = "http://localhost:7005";
+//const ServerUrl = "https://solab-access-438f80e69184.herokuapp.com";
 let SiteUrl;
 const OverrideMobileOnly = true;
 
@@ -12,6 +12,7 @@ const MyNameKey ="myname"
 const MyIDKey ="MyID"
 const MyInviteKey ="MyInvite"
 const MyGenresKey ="mygenres"
+const MyFriendsKey ="MyFriendsKey"
 const ArtistKey ="artist"
 
 const TopFriendsNum =5;

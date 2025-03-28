@@ -296,3 +296,44 @@ textarea
 {
   color: yellow;
 }
+
+/* Re-order friends  
+-------------------------------------*/
+
+.sortable-list 
+{
+    touch-action:auto;
+    overflow-y: auto;
+    list-style: none;
+    height: 60vh;
+    padding: 0vh 1vh;
+    width: 75%;
+    margin: auto;
+    margin-top: -4vh;
+}
+.sortable-item {
+    padding: 15px 20px;
+    margin: 8px 0;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    font-size: 2vh;
+    color: #333;
+    cursor: grab;
+    transition: background 0.2s, transform 0.2s;
+}
+.sortable-item:hover {
+    background: #e8f0ff;
+    transform: scale(1.03);
+}
+.dragging {
+    opacity: 0.7;
+    transform: rotate(-2deg);
+}
+.topFive {
+  background: rgba(83, 236, 172, 0.8) !important;
+}
+/*
+.over {
+    border: 2px dashed #ff8c42;
+    background: #fff3e0;
+}*/

@@ -48,6 +48,14 @@ export function SetDirectlyLinkedArtistName(name)
     DirectlyLinkedArtistName = name;
 }
 
+export function GetArtistWithThisName(name)
+{
+    for (const element of markersData.Artists)
+    {
+        if(element.name == name) return element;
+    }
+}
+
 //  Markers
 //==================================================
 

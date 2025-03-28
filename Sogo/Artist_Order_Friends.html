@@ -4,12 +4,17 @@
 		<link rel="stylesheet" href="style.css" />
         <script src="constants.js"></script>
 		<script src="jquery-3.7.1.min.js"></script>
+		<script src="DragAndDrop.js" defer></script> 
 		<script src="ReOrderFriends.js" defer></script> 
 	</head>
 	<body>
 		<p>
-            Re-order friends page.. placeholder.
+            Drag and drop to reorder your friends.</br>
+			Only the top 5 will show up on the map.
 		</p>
+		<ul id="FriendsList" class="sortable-list">
+			<li class="sortable-item" draggable="true">Item 1</li>
+		</ul>
         <button id="OkButton" type="button">Ok</button> 
 	</body>
 </html>

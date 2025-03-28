@@ -2,6 +2,7 @@ import { markersData} from "./MarkersMan.js";
 import {SetDirectlyLinkedArtistName} from "./MarkersMan.js";
 import {OpenDirect} from "./MarkersMan.js";
 import {openArtistDetails} from "./MarkersMan.js";
+import {GetArtistWithThisName} from "./MarkersMan.js";
 
 
 let AcceptFriend = document.getElementById("AcceptFriend");
@@ -91,6 +92,7 @@ export function IJustSentOne(name)
 
 export function HandleFriendButtons(index)
 {
+    // if not artist
     if (localStorage.getItem(MyIDKey) == null)
     {
         FriendMe.style.display = "none";
@@ -123,7 +125,22 @@ export function HandleFriendButtons(index)
         DenyFriend.style.display = "none";
     }
 
-    if(name == localStorage.getItem(MyNameKey)) FriendMe.style.display = "none";
+    // hide friend button for self
+    let myname = localStorage.getItem(MyNameKey);
+    if(name == myname) FriendMe.style.display = "none";
+
+    // hide friend button for already friends
+    HideButtonForAlreadyFriends(index,myname);
+}
+
+function HideButtonForAlreadyFriends(index,myname)
+{
+    let me  = GetArtistWithThisName(myname);
+
+    for (const element of me.friends)
+    {
+        if(index == element) FriendMe.style.display = "none";
+    }
 }
 
 

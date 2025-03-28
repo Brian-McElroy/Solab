@@ -10,10 +10,11 @@ html, body
    font-size:3vh;
    text-align: center;
    background-image: url("./Images/BGPattern.svg");
-   background-size: cover; /* or contain */
-   background-repeat: no-repeat;
+   background-size: 20vh;
+   background-repeat: repeat;
    background-position: center;
-   background-color: lightgray; /* Just for testing */
+   background-color: rgb(0, 0, 0); 
+   color: white;
 }
 
 /*  PABLO... u can use this to make all buttons look like divs, so u can make ure own styles
@@ -241,7 +242,13 @@ textarea
   position: absolute;
   top: 0%;   
   left: 0%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0.55);
+  transition: transform 0.3s ease-out;
+}
+
+#ArtistDetailsImage.show
+{
+  transform: translate(-50%, -50%) scale(1);
 }
 
 #ArtistInfo

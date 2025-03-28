@@ -44,4 +44,18 @@ function getBaseURL(url)
   return url.replace(/\/[^\/]*$/, '/');
 }
 
+function ShowHideDOMThing(thing, show)
+{
+  if(!show)
+  {
+    thing.style.opacity = 0;
+    thing.style.visibility = "hidden";
+  }
+  else
+  {
+    thing.style.opacity = 1;
+    thing.style.visibility = "visible";
+  }
+}
+
 GetSiteUrl();

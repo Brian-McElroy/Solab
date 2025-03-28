@@ -184,12 +184,15 @@ function SetInteraction(div)
 
 function OpenArtistDetails(index)
 {
-    details.style.display = "block"; 
+    ShowHideDOMThing(details,true);
+    //details.style.display = "block"; 
     DetailsName.innerHTML = markersData.Artists[index].name;
     DetailsGenres.innerHTML = GenresToString(index);
     openArtistDetails = index;
 
-    AddArtistImage(document.getElementById("ArtistDetailsImage"),markersData.Artists[index]);
+    let detailimage = document.getElementById("ArtistDetailsImage");
+    detailimage.classList.add('show');
+    AddArtistImage(detailimage,markersData.Artists[index]);
     ColliderArtistSelected(index);
     HandleFriendButtons(index);
     requestAnimationFrame(iconFollowPoint);
@@ -223,7 +226,10 @@ function GenresToString(index)
 
 function CloseArtistDetails(index)
 {
-    details.style.display = "none"; 
+    let detailimage = document.getElementById("ArtistDetailsImage");
+    detailimage.classList.remove('show');
+    ShowHideDOMThing(details,false)
+    //details.style.display = "none"; 
     openArtistDetails = null;
     ColliderArtistDeSelected();
     NoOneSelected();

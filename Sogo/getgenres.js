@@ -65,6 +65,23 @@ function SetGenresDisplay()
     }
 }
 
+function AddMyOwnGenrePressed()
+{
+    let inputfield = document.getElementById("userGenreInput");
+   let suggestion = inputfield.value;
+   if(suggestion == null) return;
+   if(suggestion.length < 1) return;
+
+   let node = document.getElementById("genreslist");
+   for (const child of node.children)
+    {
+        if(child.innerHTML == suggestion) return;
+   }
+
+   CreateGenreButton(suggestion);
+   inputfield.value = "";
+}
+
 function OkPressed()
 {
     if(selectedGenres.length < 1)
@@ -78,4 +95,11 @@ function OkPressed()
 }
 
 document.getElementById("OkButton").onclick = OkPressed;
+document.getElementById("submitUserGenre").onclick = AddMyOwnGenrePressed;
+
+document.getElementById("userGenreInput").addEventListener("keydown", function(event)
+{
+    if (event.key === "Enter") AddMyOwnGenrePressed();      
+ });
+
 GetGenres();

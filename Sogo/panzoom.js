@@ -230,7 +230,7 @@ function clampCameraToExtents(camera, topleft, botright)
 
     if( typeof setlocationPage !== 'undefined')
     {
-        maxzoominamout = maxZoomInSetLoc;
+        maxzoominamount = maxZoomInSetLoc;
     }
 
     // Determine max zoom in limit (arbitrary limit)

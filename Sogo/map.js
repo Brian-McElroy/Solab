@@ -21,3 +21,5 @@ function RetrieveID(key, decodeurl = false)
 RetrieveID(MyIDKey);
 RetrieveID(MyInviteKey);
 RetrieveID(MyNameKey,true);
+
+localStorage.setItem(NewUserKey,"false");

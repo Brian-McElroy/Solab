@@ -30,3 +30,4 @@ function OkPressed()
 
 document.getElementById("OkButton").onclick = OkPressed;
 WelcomeSetup();
+localStorage.setItem(NewUserKey,"true");

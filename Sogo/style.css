@@ -98,6 +98,11 @@ textarea
   color: red;
 }
 
+.selectedgenreButton
+{
+  color: yellow;
+}
+
 #copiedmessage
 {
   color: rgb(32, 151, 8);
@@ -112,7 +117,14 @@ textarea
   top: 0%;   
   left: 0%;
   background-color: gray;
-  z-index: 200; 
+  z-index: 200;
+  
+  background-image: url("./Images/link.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  background-color:#222222
 }
 
 /* FriendRequestList"><div id="OneFriendRequest  */
@@ -152,9 +164,15 @@ textarea
   position: absolute;
   top: 0%;   
   left: 100%;
-  background-color: rgb(255, 255, 255);
   z-index: 300; 
   transform: translateX(-100%);
+
+  background-image: url("./Images/hamburger-menu.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  background-color:#222222
 }
 
 #HamburgerMenu
@@ -232,7 +250,10 @@ textarea
   pointer-events: auto;
   height: 100%;
   width: 100%;
-} 
+}
+
+/* Artist details
+=======================*/
 
 #ArtistDetailsImage
 {
@@ -293,11 +314,6 @@ textarea
 }
 
 
-.selectedgenreButton
-{
-  color: yellow;
-}
-
 /* Re-order friends  
 -------------------------------------*/
 
@@ -338,3 +354,4 @@ textarea
     border: 2px dashed #ff8c42;
     background: #fff3e0;
 }*/
+

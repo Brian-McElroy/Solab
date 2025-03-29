@@ -144,7 +144,11 @@ function HideButtonForAlreadyFriends(index,myname)
 }
 
 
+if( typeof MainMapPage !== 'undefined')
+{
+    AcceptFriend.onclick =AcceptClicked;
+    DenyFriend.onclick =DenyClicked;
+}
 
-AcceptFriend.onclick =AcceptClicked;
-DenyFriend.onclick =DenyClicked;
+
 

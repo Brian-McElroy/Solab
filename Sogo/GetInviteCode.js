@@ -78,5 +78,9 @@ function OkPressed()
 document.getElementById("CopyLinkButton").onclick = GetLinkPressed;
 document.getElementById("OkButton").onclick = OkPressed;
 
-if(localStorage.getItem(MyIDKey) === null) RegisterOnServer();
+if(localStorage.getItem(NewUserKey) == "true")
+{
+    RegisterOnServer();
+    localStorage.setItem(NewUserKey,"false");
+} 
 else RetrieveSavedInviteCode();

@@ -9,9 +9,11 @@ function PopulateGenres()
         {
             let genrelist = document.getElementById("genreslist");
             let suglist = document.getElementById("suggestionslist");
+            let spellist = document.getElementById("spellinglist");
 
             genrelist.innerHTML ="";
             suglist.innerHTML ="";
+            spellist.innerHTML ="";
 
             for (const element of data.genres) {
                 genrelist.innerHTML += element + "|||"
@@ -19,6 +21,16 @@ function PopulateGenres()
 
             for (const element of data.suggestions) {
                 suglist.innerHTML += element + "|||"
+            }
+
+            for (const genre of data.spellings)
+            {
+                spellist.innerHTML += genre.main;
+                for (const element of genre.spellings)
+                {
+                    spellist.innerHTML += "|=|"+element
+                }
+                spellist.innerHTML += "|||"
             }
         }
     );
@@ -61,11 +73,12 @@ function AddAName()
     if(maingenre == null) return;
     if(maingenre.length < 1) return;
 
-    document.getElementById("genreToAdd").value = "";
+    document.getElementById("genreAltName").value = "";
+    document.getElementById("mainGenre").value = "";
 
     $.get(
-        url + "AddAName",
-        {key:key,genre:genre}
+        url + "AddAGenreSpelling",
+        {key:key,genre:maingenre,spelling:altname}
     )
     .done(function(data) {
         document.getElementById("error").innerHTML =  data;

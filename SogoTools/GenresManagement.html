@@ -1,0 +1,31 @@
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<script src="jquery-3.7.1.min.js"></script>
+        <script src="Common.js" defer></script> 
+        <script src="ManageGenres.js" defer></script> 
+	</head>
+
+	<body>
+        <textarea style="height: 15%; width: 100%;" id="AdminKeyField" placeholder="paste secure key here"></textarea>
+        <h2 id="error" style="color: blue;"> </h2></br>
+        <h2>Current Genres</h2></br>
+        <p id="genreslist">none</p></br>
+        <h2>Current Genres Suggestions</h2></br>
+        <p id="suggestionslist">none</p></br>
+        <h2>Add a Genre</h2></br>
+        <form action="javascript:AddAGenre()">
+            <input type="text" id="genreToAdd" placeholder="type genre here">
+            <input type="submit" value="Add">
+        </form>
+        <h2>Add a genre alternate name</h2></br>
+        <form action="javascript:AddAName()">
+            <input type="text" id="mainGenre" placeholder="type genre here">
+            <input type="text" id="genreAltName" placeholder="type alternate spelling here">
+            <input type="submit" value="Add">
+        </form>
+	</body>
+</html>

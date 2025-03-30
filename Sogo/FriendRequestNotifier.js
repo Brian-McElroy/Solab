@@ -136,6 +136,7 @@ export function HandleFriendButtons(index)
 function HideButtonForAlreadyFriends(index,myname)
 {
     let me  = GetArtistWithThisName(myname);
+    if(me == null) return;
 
     for (const element of me.friends)
     {

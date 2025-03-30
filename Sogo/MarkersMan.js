@@ -50,8 +50,10 @@ export function SetDirectlyLinkedArtistName(name)
 
 export function GetArtistWithThisName(name)
 {
+    //console.log("myname: "+name);
     for (const element of markersData.Artists)
     {
+        //console.log(element.name);
         if(element.name == name) return element;
     }
 }

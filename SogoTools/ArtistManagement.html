@@ -1,0 +1,54 @@
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="color-scheme" content="light dark">
+        <link rel="stylesheet" href="./pico.min.css">
+		<script src="jquery-3.7.1.min.js"></script>
+        <script src="Common.js" defer></script> 
+        <script src="ManageArtists.js" defer></script> 
+	</head>
+	<body>
+        <main class="container">
+            <textarea style="height: 15%; width: 100%;" id="AdminKeyField" placeholder="paste secure key here"></textarea>
+            <h2 id="error" style="color: blue;"> </h2>error or success message</br>
+            <hr>
+            <button id="GetArtistData">Get all Artist Data</button>
+            <div id="artistList">
+                <article style="display: none;" >
+                    <p>account info account info account info account info account info account info</p>
+                    <p>account info account info account info account info account info account info</p>
+                </article>
+            </div>
+            <hr>
+            <h2>Add an artist</h2></br>
+            <p>You cant add artists here. Add them from the normal Welcome.html using your special invite code</p>
+            <hr>
+            <h2>Remove an artist</h2></br>
+            <form action="javascript:RemoveArtist()">
+                <input type="text" id="removeid" placeholder="type artist id here">
+                <input type="submit" value="Remove">
+            </form>
+            <hr>
+            <h2>Add a friendship</h2></br>
+            <form action="javascript:AddAFriend()">
+                <input type="text" id="friendshipA" placeholder="type artist id here">
+                <input type="text" id="friendshipB" placeholder="type artist id here">
+                <input type="submit" value="Add">
+            </form>
+            <hr>
+            <h2>Remove a friendship</h2></br>
+            <form action="javascript:RemoveAFriend()">
+                <input type="text" id="removefriendshipA" placeholder="type artist id here">
+                <input type="text" id="removefriendshipB" placeholder="type artist id here">
+                <input type="submit" value="Remove">
+            </form>
+            <hr>
+
+        </main>
+	</body>
+</html>

@@ -4,15 +4,25 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="color-scheme" content="light dark">
+        <link rel="stylesheet" href="./pico.min.css">
 		<script src="jquery-3.7.1.min.js"></script>
 		<script src="Common.js" defer></script> 
-		<script src="scripts.js" defer></script> 
+        <script src="Dangerzone.js" defer></script> 
 	</head>
-
 	<body>
-		<button id="ResetData">Reset Data</button>
-		<button id="RandomizeLocations">Randomize Locations</button>
-		<button id="SetData">SetData</button>
-		<textarea style="height: 50%; width: 50%;" id="DataInputField">
+        <main class="container">
+            <textarea style="height: 15%; width: 100%;" id="AdminKeyField" placeholder="paste secure key here"></textarea>
+            <h2 id="error" style="color: blue;">error or success message will appear here</h2></br>
+            <hr>
+            <button id="GetAllData">Get all Data</button>
+			<p id="alldata">data goes here</p>
+			<hr>
+			<textarea style="height: 50%; width: 100%;" id="datatoset" placeholder="paste data json here"></textarea>
+			<p>!!Warning!! only press this if you are sure!! It will reset the database.</p>
+			<button style="background-color: red;" id="SetAllData">Set all Data</button>
+        </main>
 	</body>
 </html>

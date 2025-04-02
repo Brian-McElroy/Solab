@@ -24,8 +24,7 @@ iconSizes.forEach(size => {
 });
 
 // Add theme colors
-addMetaTag("apple-mobile-web-app-status-bar", "#db4938");
-addMetaTag("theme-color", "#db4938");
+addMetaTag("apple-mobile-web-app-status-bar", "#000000");
 addMetaTag("theme-color", "#db4938");
 
 

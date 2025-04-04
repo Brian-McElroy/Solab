@@ -4,7 +4,7 @@ import { setChoseLocationFunction } from "./MarkersMan.js";
 
 export function LocationPicked()
 {
-    okbutton.style.display = "block";
+    okbutton.disabled = false;
 }
 
 

@@ -147,7 +147,7 @@ function SetDOMOnOff()
 {
     for (const element of priorityList)
     {
-        ShowHideDOMThing(DOMmarkers[element.index],CheckVisible(element));
+        ShowHideDOMThingWithFadeout(DOMmarkers[element.index],CheckVisible(element));
     }
 }
 

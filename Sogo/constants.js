@@ -45,7 +45,7 @@ function getBaseURL(url)
   return url.replace(/\/[^\/]*$/, '/');
 }
 
-function ShowHideDOMThing(thing, show)
+function ShowHideDOMThing(thing, show, fadeout)
 {
   if(!show)
   {
@@ -56,6 +56,25 @@ function ShowHideDOMThing(thing, show)
   {
     thing.style.opacity = 1;
     thing.style.visibility = "visible";
+  }
+}
+
+function ShowHideDOMThingWithFadeout(thing, show)
+{
+  if (thing._hideTimer) {
+    clearTimeout(thing._hideTimer);
+    thing._hideTimer = null;
+  }
+  if (!show) {
+    thing.style.opacity = 0;
+
+    thing._hideTimer = setTimeout(() => {
+      thing.style.visibility = "hidden";
+      thing._hideTimer = null;
+    }, 300); 
+  } else {
+    thing.style.visibility = "visible";
+    thing.style.opacity = 1;
   }
 }
 

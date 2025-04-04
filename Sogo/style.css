@@ -249,9 +249,17 @@ textarea
   height: 5.5vh;
   width: 5.5vh;
   background-color: black;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1);
   border-radius: 50%;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: 99; 
 } 
+
+.show
+{
+  transform: translate(-50%, -50%) scale(2);
+  z-index: 101; 
+}
 
 .ArtistMarkerImage
 {
@@ -263,22 +271,6 @@ textarea
 /* Artist details
 ========================================================================*/
 
-#ArtistDetailsImage
-{
-  height: 10vh;
-  width:  10vh;
-  border-radius: 50%;
-  position: absolute;
-  top: 0%;   
-  left: 0%;
-  transform: translate(-50%, -50%) scale(0.55);
-  transition: transform 0.3s ease-out;
-}
-
-#ArtistDetailsImage.show
-{
-  transform: translate(-50%, -50%) scale(1);
-}
 
 #ArtistInfo
 {

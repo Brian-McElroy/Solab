@@ -34,6 +34,7 @@ export function ColliderArtistSelected(artindex)
 {
     for (const element of priorityList) element.selected =false;
     let count =0;
+    GetItemWithThisIndex(artindex).selected = true;
     for (const friend of markersData.Artists[artindex].friends)
     {
         GetItemWithThisIndex(friend).selected = true;
@@ -134,7 +135,7 @@ function SetDOMOnOff()
 {
     for (const element of priorityList)
     {
-        DOMmarkers[element.index].style.display = CheckVisible(element) ? "block" : "none";
+        ShowHideDOMThing(DOMmarkers[element.index],CheckVisible(element));
     }
 }
 

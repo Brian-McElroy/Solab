@@ -94,7 +94,19 @@ function CheckVisible(icon)
 
 function overlaps(top, bot)
 {
-    return CheckBoxIntersects(BoxFromPoint(top),BoxFromPoint(bot))
+    if (!CheckBoxIntersects(BoxFromPoint(top),BoxFromPoint(bot))) return false;
+
+    let distSquared = getDistanceSquared(top,bot);
+    let leewayDiam = markerDiameter*0.8;
+    if(distSquared < leewayDiam*leewayDiam) return true;
+    return false;
+}
+
+function getDistanceSquared(obj1, obj2)
+{
+    const dx = obj2.position.x - obj1.position.x;
+    const dy = obj2.position.y - obj1.position.y;
+    return dx * dx + dy * dy;
 }
 
 function CheckOutOfView()

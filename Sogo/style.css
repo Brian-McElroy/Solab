@@ -362,3 +362,51 @@ textarea
     background: #fff3e0;
 }*/
 
+/* Bandcamp tutorial
+====================================================================================*/
+
+#tutorialletterbox
+{
+  position: absolute;
+  left: 0;
+  top: 5vh;
+  width: 100%;
+  height: 70%;
+  justify-content: center;
+  align-items: center;
+}
+
+#tutorialImage
+{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+#tuteback
+{
+  position: absolute;
+  left: 2%;
+  top: 75vh;
+  width: 10vw;
+  height: 10vh;
+}
+
+#tuteforward
+{
+  position: absolute;
+  left: 86.5%;
+  top: 75vh;
+  width: 10vw;
+  height: 10vh
+}
+
+#tutorialText
+{
+  margin: 0;
+  position: absolute;
+  left: 14vw;
+  top: 75vh;
+  width: 72vw;
+  height: 15vh
+}

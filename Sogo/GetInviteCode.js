@@ -58,7 +58,7 @@ function RetrieveSavedInviteCode()
     MyName = localStorage.getItem(MyNameKey);
     MyInviteCode = localStorage.getItem(MyInviteKey);
     document.getElementById("CopyLinkButton").style.display ="block";
-    document.getElementById("OkButton").style.display ="block";
+    document.getElementById("OkButton").disabled = false;
     gotInviteCode = true;
 }
 
@@ -67,7 +67,7 @@ function GetLinkPressed()
     if(!gotInviteCode) return;
     navigator.clipboard.writeText(GetInviteUrl());
     document.getElementById("copiedmessage").style.display ="block";
-    document.getElementById("OkButton").style.display ="block";
+    document.getElementById("OkButton").disabled = false;
 }
 
 function OkPressed()

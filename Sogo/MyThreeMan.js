@@ -111,9 +111,9 @@ botright.position.set(5,-1.8,0); // (x, y, z)
 //=====================
 
 export const topleftExtents = new THREE.Mesh( geometry, material );
-scene.add( topleftExtents );
+//scene.add( topleftExtents );
 topleftExtents.position.set(-5,6,0); // (x, y, z)
 
 export const botrightExtents = new THREE.Mesh( geometry, material );
-scene.add( botrightExtents );
+//scene.add( botrightExtents );
 botrightExtents.position.set(6,-5.5,0); // (x, y, z)

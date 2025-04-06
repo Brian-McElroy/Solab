@@ -1,9 +1,11 @@
 
+let urlInput = document.getElementById('trackInputField');
+let okbutton = document.getElementById("OkButton");
 
 function OkPressed()
 {
-  let url = document.getElementById('trackInputField').value;
-  let extracted = extractBandcampInfo(url);
+  //let url = document.getElementById('trackInputField').value;
+  let extracted = extractBandcampInfo(urlInput.value);
 
   if(!IsURLOk(extracted))
   {
@@ -35,8 +37,12 @@ function extractBandcampInfo(html)
 }
 
 function generateBandcampIframe({ album, track, href, hrefText })
- {
+{
   return `<iframe style="border: 0; width: 100%; height: 42px;" src="https://bandcamp.com/EmbeddedPlayer/album=${album}/size=small/bgcol=333333/linkcol=e32c14/track=${track}/transparent=true/" seamless><a href="${href}">${hrefText}</a></iframe>`;
 }
 
-document.getElementById("OkButton").onclick = OkPressed;
+okbutton.onclick = OkPressed;
+urlInput.addEventListener('input', () => 
+{
+   okbutton.disabled = !(urlInput.value);   
+});

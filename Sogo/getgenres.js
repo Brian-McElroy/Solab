@@ -53,6 +53,8 @@ function GenrePressed(genre)
         } 
     }
     SetGenresDisplay();
+
+    document.getElementById("OkButton").disabled = !(selectedGenres.length > 0);
 }
 
 function SetGenresDisplay()

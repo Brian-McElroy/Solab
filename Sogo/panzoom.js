@@ -283,7 +283,7 @@ window.addEventListener('touchmove', onTouchMove, { passive: false });
 window.addEventListener('touchend', onTouchEnd);
 
 
-document.querySelectorAll("button:not(#HamburgerButton)").forEach(button => {
+document.querySelectorAll("button:not(#HamburgerButton):not(#LinkToHereButton):not(#installAppButton)").forEach(button => {
     button.addEventListener("pointerup", function(event) {
         event.preventDefault(); // Prevent unintended double events
         this.click(); // Manually trigger a click event

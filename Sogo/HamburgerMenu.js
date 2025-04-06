@@ -34,6 +34,7 @@ if(localStorage.getItem(MyIDKey) != null)
     document.getElementById("GotoReorderFriends").onclick = GotoReorderFriends;
 }
 
+
 document.addEventListener('click', function(event) {
 if (menuVisible && !menudiv.contains(event.target) && !hambutton.contains(event.target))
 {

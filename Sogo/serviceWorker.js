@@ -1,14 +1,13 @@
-const staticDevCoffee = "dev-coffee-site-v1"
+const staticSogo = "sogo-site-v1"
 const assets = [
   "/",
   "/index.html",
-  "/css/style.css",
-  "/js/app.js",
+  "/style.css",
 ]
 
 self.addEventListener("install", installEvent => {
   installEvent.waitUntil(
-    caches.open(staticDevCoffee).then(cache => {
+    caches.open(staticSogo).then(cache => {
       cache.addAll(assets)
     })
   )

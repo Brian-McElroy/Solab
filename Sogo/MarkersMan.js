@@ -223,7 +223,8 @@ function GenresToString(index)
 
 function CloseArtistDetails()
 {
-    let detailimage = document.getElementById("ArtistDetailsImage");
+    if(openArtistDetails == null) return;
+    
     DOMmarkers[openArtistDetails].classList.remove('show');
     ShowHideDOMThing(details,false)
     openArtistDetails = null;

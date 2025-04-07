@@ -1,3 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap');
+:root {
+  --sogo-red: #2E0000;
+  --sogo-white: #CDCDCD;
+}
+
+/* Custom font style helpers */
+.condensed {
+  font-family: 'Ubuntu Condensed', sans-serif;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.bolditalic {
+  font-weight: 700;
+  font-style: italic;
+}
+
 html, body
 {
    overflow: hidden;
@@ -14,7 +39,8 @@ html, body
    background-repeat: repeat;
    background-position: center;
    background-color: rgb(0, 0, 0); 
-   color: white;
+   color: var(--sogo-white);
+   font-family: 'Ubuntu', sans-serif;
 }
 
 /*  PABLO... u can use this to make all buttons look like divs, so u can make ure own styles
@@ -61,21 +87,50 @@ input
   outline-style: solid;
 }
 
+/* pabstyle for regular textbox */
+
+.textboxStandard {
+  background-color: var(--sogo-red);
+  color: var(--sogo-white);
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 300;
+  font-size: 2.5vh;
+  line-height: 1.5;
+  text-align: left;
+
+  width: 85vw;         /* Responsive for small screens */
+  max-width: 420px;    /* But never wider than this */
+  margin: 10vh auto;   /* Centered with vertical space */
+  padding: 4vh 4vw;
+
+  box-shadow: 0 1.5vh 2.5vh rgba(0, 0, 0, 0.8);
+  border-radius: 0;
+}
 
 textarea:focus::placeholder {
   color: transparent;
 }
 
-textarea
-{
-  cursor: text;
-  touch-action: auto;
-  pointer-events: auto;
-  height: 30%;
-  width: 85%;
-  font-size: 2vh;
-  text-align: center;
-  outline-style: solid;
+textarea {
+  overflow: hidden;         /* Hide the scroll */
+  resize: none;             /* Optional: disables resizing drag handle */
+  width: 85vw;
+  max-width: 420px;  height: 12vh;
+  background-color: black;
+  color: var(--sogo-white);
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 2.3vh;
+  padding: 1.5vh 2vh;
+
+  border: 0.3vh solid var(--sogo-red);
+  border-radius: 0;
+  outline: none;
+
+  display: block;
+  margin: 5vh auto;
+  box-sizing: border-box;
 }
 
 #flexcontainer
@@ -84,12 +139,51 @@ textarea
   flex-direction: column;
 }
 
-#OkButton
-{
+#OkButton {
   position: absolute;
   bottom: 4vh;
   left: 50%;
   transform: translateX(-50%);
+  
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 3.5vh;
+
+  padding: 2vh 5vh;
+  min-width: 280px;
+
+  background-color: black;
+  color: var(--sogo-white);
+  border: 0.1vh solid var(--sogo-white);
+  border-radius: 0.5vh;
+  text-align: center;
+
+  box-shadow: 0 0.8vh 1.2vh rgba(0, 0, 0, 0.7);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+#OkButton:disabled {
+  background-color: #111111;
+  color: #666666;
+  border: 0.1vh solid #444444;
+  opacity: 0.5;
+  cursor: default;
+  box-shadow: none;
+}
+
+#OkButton:hover:enabled {
+  background-color: var(--sogo-white);
+  color: black;
+  cursor: pointer;
+}
+
+#OkButton:disabled:hover {
+  background-color: #111111;
+  color: #666666;
+  border: 0.1vh solid #444444;
+  box-shadow: none;
+  cursor: default;
 }
 
 #CopyLinkButton

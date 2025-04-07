@@ -3,15 +3,17 @@
 const installApp = document.getElementById('installApp');
 const installAppButton = document.getElementById('installAppButton');
 const dontinstallAppButton = document.getElementById('dontinstallAppButton');
+const iOSModal = document.getElementById('iOSInstallModal');
 
 let dontinstall =false;
 
 let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e) =>
-    {
-        deferredPrompt = e;
-        ShowHideDOMThingWithFadeout(installApp,true);
-    });
+window.addEventListener('beforeinstallprompt', (e) =>
+{
+    deferredPrompt = e;
+    ShowHideDOMThingWithFadeout(installApp,true);
+    installAppButton.addEventListener('click',AndroidInstall);
+});
 
 
 dontinstallAppButton.onclick = ()=>
@@ -22,7 +24,7 @@ dontinstallAppButton.onclick = ()=>
     ShowHideDOMThingWithFadeout(installApp,false);
 } 
 
-installAppButton.addEventListener('click', async () => 
+async function AndroidInstall()
 {
     if(dontinstall) return;
     
@@ -35,4 +37,30 @@ installAppButton.addEventListener('click', async () =>
             ShowHideDOMThingWithFadeout(installApp,false);
         }
     }
-});
+}
+
+// iOS
+//---------------
+
+function shouldShowInstallModal()
+{
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    const isIOS = /iphone|ipad|ipod/.test(userAgent);
+    const isInStandaloneMode = ('standalone' in window.navigator) && window.navigator.standalone;
+  
+    return isIOS && !isInStandaloneMode;
+}
+
+
+if(shouldShowInstallModal())
+{
+    ShowHideDOMThingWithFadeout(installApp,true);
+    installAppButton.addEventListener('click',iOSInstall);
+}
+
+function iOSInstall()
+{
+    ShowHideDOMThingWithFadeout(iOSModal,true);
+}
+
+document.getElementById("dismissiOSModal").onclick =()=>{ShowHideDOMThingWithFadeout(iOSModal,false);};

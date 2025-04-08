@@ -3,6 +3,12 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import {Update as UpdatePanZoom} from "./panzoom.js";
 import { iconFollowPoint } from "./MarkersMan.js";
 
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+import { FXAAShader } from 'three/addons/shaders/FXAAShader.js';
+
 let debugtxt = document.getElementById("debugtxt");
 
 // Select the div with id "map"
@@ -13,7 +19,7 @@ container.addEventListener('touchstart', (e) => {
   }, { passive: false });
 
 // Set up scene, camera, and renderer
-export const scene = new THREE.Scene();
+
 //scene.background = new THREE.Color( 0xff0000 );
 
 // PERSPCTIVE CAMERA
@@ -23,6 +29,7 @@ export const scene = new THREE.Scene();
 //scene.add( camera );
 //const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
 
+export const scene = new THREE.Scene();
 
 export const width = container.clientWidth;
 export const height = container.clientHeight;
@@ -35,16 +42,19 @@ export const camera = new THREE.OrthographicCamera(
         frustumSize * aspect / 2,  // right
         frustumSize / 2,           // top
     -frustumSize / 2,           // bottom
-        0.1, 10                    // near, far
+        0.01, 100                    // near, far
 );
 camera.position.z = 10; // Position the camera
 
 // Renderer
 export const renderer = new THREE.WebGLRenderer({ alpha: true });
+renderer.shadowMap.enabled = false;
 renderer.setSize(width, height);
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setClearColor( 0xffffff, 0);
 container.appendChild(renderer.domElement);
+let model;
+let composer;
 
 // Animation loop
 function animate()
@@ -52,7 +62,9 @@ function animate()
     //iconFollowPoint();
     UpdatePanZoom();
     renderer.render(scene, camera);
+    if(composer) composer.render();
     //requestAnimationFrame(iconFollowPoint);
+    //model.rotation.y += 0.01;
 }
 renderer.setAnimationLoop(animate);
 
@@ -79,19 +91,61 @@ window.addEventListener('resize', onResize);
 //===========================================
 
 const loader = new GLTFLoader();
-loader.load( './world_map/Brian_edited.glb', function ( gltf ) {
+loader.load( './world_map/Brian_Blender_1.glb', function ( gltf )
+{
+    model = gltf.scene ;
 
-	scene.add( gltf.scene );
+    model.traverse((child) =>
+    {
+        if (child.isMesh) {
+          child.castShadow = false;
+          child.receiveShadow = false;
+        }
+    });
+
+    scene.add(model );
+    Outline(model);
 
 }, undefined, function ( error ) {
 
 	console.error( error );
-
 } );
 
 
-const light = new THREE.AmbientLight(new THREE.Color().setRGB( 1, 1, 1 ),4);
-scene.add( light );
+//const light = new THREE.AmbientLight(new THREE.Color().setRGB( 1, 1, 1 ),4);
+//scene.add( light );
+
+// outline
+//===========================================
+
+
+function Outline(model)
+{
+    // Initialize EffectComposer
+    composer = new EffectComposer(renderer);
+    const renderPass = new RenderPass(scene, camera);
+    composer.addPass(renderPass);
+
+    // Initialize OutlinePass
+    const outlinePass = new OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight), scene, camera);
+    outlinePass.selectedObjects = [model];
+    outlinePass.edgeStrength = 3.0;
+    outlinePass.edgeGlow = 0.5;
+    outlinePass.edgeThickness = 1.0;
+    outlinePass.pulsePeriod = 0;
+    outlinePass.renderToScreen = true;
+    outlinePass.usePatternTexture = false;
+    outlinePass.visibleEdgeColor.set('#ffcc00'); 
+    outlinePass.hiddenEdgeColor.set('#ffcc00'); 
+
+    composer.addPass(outlinePass);
+
+    // Initialize FXAA Pass
+    const fxaaPass = new ShaderPass(FXAAShader);
+    fxaaPass.uniforms['resolution'].value.set(1 / window.innerWidth, 1 / window.innerHeight);
+    composer.addPass(fxaaPass);
+}
+
 
 
 // Bounds

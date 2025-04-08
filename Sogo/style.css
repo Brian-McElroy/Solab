@@ -295,7 +295,7 @@ textarea
   position: absolute;
   height: 5.5vh;
   width: 5.5vh;
-  background-color: rgb(55, 182, 93);
+  background-color: #00963F;
   transform: translate(-50%, -50%) scale(1);
   border-radius: 50%;
   transition: transform 0.3s ease, opacity 0.3s ease;

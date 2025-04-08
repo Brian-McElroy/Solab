@@ -293,10 +293,9 @@ textarea
   user-select: none;   /* Prevent text selection */
   -webkit-user-drag: none; /* Prevent image dragging on WebKit browsers */
   position: absolute;
-  overflow: hidden;
   height: 5.5vh;
   width: 5.5vh;
-  background-color: black;
+  background-color: rgb(55, 182, 93);
   transform: translate(-50%, -50%) scale(1);
   border-radius: 50%;
   transition: transform 0.3s ease, opacity 0.3s ease;
@@ -311,9 +310,13 @@ textarea
 
 .ArtistMarkerImage
 {
+  position: absolute;
   pointer-events: auto;
-  height: 100%;
-  width: 100%;
+  top: 0.25vh;
+  left: 0.25vh;
+  height: 5vh;
+  width: 5vh;
+  border-radius: 50%;
 }
 
 /* Artist details

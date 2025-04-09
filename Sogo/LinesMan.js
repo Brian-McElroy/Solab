@@ -12,7 +12,7 @@ import { botright } from "./MyThreeMan.js";
 const LineZ = 1;
 
 const LTmaterial = new LineMaterial({
-  color: 0xff0000,
+  color: 0x00963F,
   linewidth: 5, // Line thickness in pixels
   resolution: new THREE.Vector2(window.innerWidth, window.innerHeight), // Required
 });

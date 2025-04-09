@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<title>Sogo</title>
+		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 		<link rel="stylesheet" href="./style.css" />
 		<script type="importmap">
@@ -27,8 +29,21 @@
 		<script type="module" src="ArtistDirectLink.js"></script>
 		<script type="module" src="RequestFriend.js"></script>
 		<script type="module" src="FriendRequestNotifier.js"></script>
+		<script src="setupPWA.js" defer></script>
+		<script src="PWAInstall.js" defer></script>
 	</head>
 	<body>
+	<div id="installApp">
+		<button id="installAppButton">Install</button>
+		<button id="dontinstallAppButton">X</button>
+	</div>
+	<div id="iOSInstallModal">
+		<div id="modalBox">
+			<p>To install Sogo...</p>
+			<p>Tap the Share button and then tap "Add to Home Screen"</p>
+			<button id="dismissiOSModal">Ok</button>
+		</div>
+	</div>
 	<p id="debugtxt"></p>
 	<button id="LinkToHereButton" type="button"></button> 
 	<button style="display: none;" id="HamburgerButton" type="button"></button> 

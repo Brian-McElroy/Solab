@@ -9,6 +9,9 @@ import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { FXAAShader } from 'three/addons/shaders/FXAAShader.js';
 
+import { AddBorderLines } from "./CountryBorderLines.js";
+
+
 let debugtxt = document.getElementById("debugtxt");
 
 // Select the div with id "map"
@@ -91,7 +94,7 @@ window.addEventListener('resize', onResize);
 //===========================================
 
 const loader = new GLTFLoader();
-loader.load( './world_map/Brian_Blender_1.glb', function ( gltf )
+loader.load( './world_map/Brian_WithBorders.glb', function ( gltf )
 {
     model = gltf.scene ;
 
@@ -105,11 +108,14 @@ loader.load( './world_map/Brian_Blender_1.glb', function ( gltf )
 
     scene.add(model );
     Outline(model);
+    AddBorderLines(model);
 
 }, undefined, function ( error ) {
 
 	console.error( error );
 } );
+
+
 
 
 //const light = new THREE.AmbientLight(new THREE.Color().setRGB( 1, 1, 1 ),4);

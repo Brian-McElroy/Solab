@@ -99,4 +99,3 @@ function CheckPointOk(point)
 
   return true;
 }
-

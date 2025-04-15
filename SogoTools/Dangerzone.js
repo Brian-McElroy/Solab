@@ -42,7 +42,26 @@ function SetAllData()
     });
 }
 
+function ReSetAllData()
+{
+    let key = document.getElementById("AdminKeyField").value;
+
+    $.get(
+        url + "ResetAllData",
+        {key:key}
+    )
+    .done(function(data) {
+        document.getElementById("error").innerHTML = data;
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+        document.getElementById("error").innerHTML =  textStatus +" "+errorThrown;
+    })
+    .always(function() {
+    });
+}
+
 
 document.getElementById("GetAllData").onclick = GetAllData;
 document.getElementById("SetAllData").onclick = SetAllData;
+document.getElementById("ResetAllData").onclick = ReSetAllData;
 

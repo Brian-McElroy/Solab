@@ -34,6 +34,7 @@ container.addEventListener('touchstart', (e) => {
 //const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
 
 export const scene = new THREE.Scene();
+export const linescene = new THREE.Scene();
 
 export const width = container.clientWidth;
 export const height = container.clientHeight;
@@ -57,6 +58,7 @@ renderer.setSize(width, height);
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setClearColor( 0xffffff, 0);
 container.appendChild(renderer.domElement);
+renderer.autoClear = false;
 let model;
 let composer;
 
@@ -66,10 +68,12 @@ function animate()
     //iconFollowPoint();
     UpdatePanZoom();
 
-    renderer.render(scene, camera);
+    //renderer.render(scene, camera);
     if(composer) composer.render();
     //requestAnimationFrame(iconFollowPoint);
     //model.rotation.y += 0.01;
+    renderer.clearDepth(); // important to allow new draws on top
+    renderer.render(linescene, camera);
 }
 renderer.setAnimationLoop(animate);
 
@@ -160,7 +164,7 @@ function Outline(model)
     // Initialize FXAA Pass
     const fxaaPass = new ShaderPass(FXAAShader);
     fxaaPass.uniforms['resolution'].value.set(1 / window.innerWidth, 1 / window.innerHeight);
-    composer.addPass(fxaaPass);
+    //composer.addPass(fxaaPass);
 }
 
 

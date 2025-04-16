@@ -16,7 +16,7 @@ export function AddBorderLines(gltfscene)
         {
             // Create edges geometry
             const edgesGeometry = new THREE.EdgesGeometry(child.geometry,45);
-            const edgesMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
+            const edgesMaterial = new THREE.LineBasicMaterial({ color: 0xaa0000 });
             const edgeLines = new THREE.LineSegments(edgesGeometry, edgesMaterial);
 
             // Ensure world matrix is up to date

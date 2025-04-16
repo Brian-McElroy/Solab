@@ -8,6 +8,7 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { FXAAShader } from 'three/addons/shaders/FXAAShader.js';
+//import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 
 import { AddBorderLines } from "./CountryBorderLines.js";
 
@@ -64,6 +65,7 @@ function animate()
 {
     //iconFollowPoint();
     UpdatePanZoom();
+
     renderer.render(scene, camera);
     if(composer) composer.render();
     //requestAnimationFrame(iconFollowPoint);
@@ -135,9 +137,9 @@ function Outline(model)
     // Initialize OutlinePass
     const outlinePass = new OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight), scene, camera);
     outlinePass.selectedObjects = [model];
-    outlinePass.edgeStrength = 3.0;
-    outlinePass.edgeGlow = 0.5;
-    outlinePass.edgeThickness = 1.0;
+    outlinePass.edgeStrength = 2.0;
+    outlinePass.edgeGlow = 1;
+    outlinePass.edgeThickness = 1;
     outlinePass.pulsePeriod = 0;
     outlinePass.renderToScreen = true;
     outlinePass.usePatternTexture = false;
@@ -145,7 +147,16 @@ function Outline(model)
     outlinePass.hiddenEdgeColor.set('#ffcc00'); 
 
     composer.addPass(outlinePass);
-
+    /*
+         // UnrealBloomPass setup
+         const bloomPass = new UnrealBloomPass(
+            new THREE.Vector2(window.innerWidth, window.innerHeight),
+            0.5,   // strength
+            0.5,   // radius
+            0.85   // threshold
+        );
+        composer.addPass(bloomPass);
+    */
     // Initialize FXAA Pass
     const fxaaPass = new ShaderPass(FXAAShader);
     fxaaPass.uniforms['resolution'].value.set(1 / window.innerWidth, 1 / window.innerHeight);

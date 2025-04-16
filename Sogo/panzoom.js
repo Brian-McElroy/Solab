@@ -21,7 +21,7 @@ let currentMousePosition = { x: 0, y: 0 };
 let touchDistance = 0;
 let multitouch = false;
 
-const maxZoomIn = 0.02; // 0.05;
+const maxZoomIn = 0.013; // 0.05;
 const maxZoomInSetLoc = 0.05;
 const leeway = 0.065;
 

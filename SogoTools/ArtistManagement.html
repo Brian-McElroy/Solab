@@ -28,6 +28,14 @@
             <h2>Add an artist</h2></br>
             <p>You cant add artists here. Add them from the normal Welcome.html using your special invite code</p>
             <hr>
+            <h2>Set artist featured</h2></br>
+            <form action="javascript:SetArtistFeatured()">
+                <input type="text" id="featureid" placeholder="type artist id here">
+                <input type="checkbox" id="isfeatured"><p>Set featured or not</p>
+                </br></br>
+                <input type="submit" value="Set featured">
+            </form>
+            <hr>
             <h2>Remove an artist</h2></br>
             <form action="javascript:RemoveArtist()">
                 <input type="text" id="removeid" placeholder="type artist id here">
@@ -47,8 +55,6 @@
                 <input type="text" id="removefriendshipB" placeholder="type artist id here">
                 <input type="submit" value="Remove">
             </form>
-            <hr>
-
         </main>
 	</body>
 </html>

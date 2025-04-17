@@ -22,8 +22,9 @@ function PopulateArtistData()
             {
                 //console.log(JSON.stringify(element));
                 let clone = artistlist.firstElementChild.cloneNode(true);
+                let featuredString = (element.featured == true) ? "true":"false";
                 clone.style.display = "block";  
-                clone.children[0].innerHTML = "Name: " + element.name + "  ID: " + element.id + "  Invite code: " + element.inviteCode;
+                clone.children[0].innerHTML = "Name: " + element.name + "  ID: " + element.id + "  Invite code: " + element.inviteCode + "  Featured: " + featuredString;
                 clone.children[1].innerHTML = "Friends:"
                 for (const friend of element.friends) clone.children[1].innerHTML += "   " +friend;
 
@@ -45,6 +46,33 @@ function RemoveArtist()
     $.get(
         url + "RemoveAnArtist",
         {key:key,id:id}
+    )
+    .done(function(data) {
+        document.getElementById("error").innerHTML =  data;
+        PopulateArtistData();
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+        document.getElementById("error").innerHTML =  textStatus +" "+errorThrown;
+    })
+    .always(function() {
+    });
+}
+
+function SetArtistFeatured()
+{
+    let key = document.getElementById("AdminKeyField").value;
+    let id = document.getElementById("featureid").value;
+    let dofeature = document.getElementById("isfeatured").checked;
+
+    //console.log(dofeature + " " + typeof dofeature);
+
+    if(!id) return;
+
+    document.getElementById("featureid").value = "";
+
+    $.get(
+        url + "SetFeatured",
+        {key:key,id:id,isFeatured:dofeature}
     )
     .done(function(data) {
         document.getElementById("error").innerHTML =  data;

@@ -75,11 +75,20 @@ img
 
 button
 {
-  font-size: 4vh;
   text-align: center;
   max-width:80%;
   touch-action: auto;
   transition: opacity 0.3s ease;
+
+  font-weight: 700;
+  font-size: 3.5vh;
+
+  background-color: black;
+  color: var(--sogo-white);
+  border: 0.1vh solid var(--sogo-white);
+  border-radius: 0.5vh;
+  text-align: center;
+  box-shadow: 0 0.8vh 1.2vh rgba(0, 0, 0, 0.7);
 }
 
 button:disabled
@@ -125,6 +134,7 @@ textarea
   bottom: 4vh;
   left: 50%;
   transform: translateX(-50%);
+  text-transform: uppercase;
 }
 
 #CopyLinkButton
@@ -330,8 +340,8 @@ textarea
   user-select: none;   /* Prevent text selection */
   -webkit-user-drag: none; /* Prevent image dragging on WebKit browsers */
   position: absolute;
-  height: 5.5vh;
-  width: 5.5vh;
+  height: 6vh;
+  width: 6vh;
   background-color: #00963F;
   transform: translate(-50%, -50%) scale(1);
   border-radius: 50%;
@@ -349,11 +359,15 @@ textarea
 {
   position: absolute;
   pointer-events: auto;
-  top: 0.25vh;
-  left: 0.25vh;
+  top: 0.5vh;
+  left: 0.5vh;
   height: 5vh;
   width: 5vh;
   border-radius: 50%;
+  /*top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);*/
+  filter: drop-shadow(0.15vh 1vh 1vh rgba(0, 0, 0,0.5)); 
 }
 
 /* Artist details

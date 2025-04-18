@@ -5,6 +5,7 @@ import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
 import { LineGeometry } from 'three/addons/lines/LineGeometry.js';
 
 import { scene} from "./MyThreeMan.js";
+import { linescene} from "./MyThreeMan.js";
 import { markersData} from "./MarkersMan.js";
 import { topleft } from "./MyThreeMan.js";
 import { botright } from "./MyThreeMan.js";
@@ -48,7 +49,7 @@ function ClearLines()
 {
   for (const element of currentLines)
   {
-    scene.remove(element);
+    linescene.remove(element);
   }
   currentLines =[];
 }
@@ -82,7 +83,7 @@ function CreateLine(pointA,pointB)
     // Create Line2 object and add to scene
     let line = new Line2(LTgeometry, LTmaterial);
     line.computeLineDistances(); // Required for dashed lines (even if not using dashes)
-    scene.add(line);
+    linescene.add(line);
     currentLines.push(line);
   }
   catch
@@ -99,4 +100,3 @@ function CheckPointOk(point)
 
   return true;
 }
-

@@ -69,8 +69,9 @@ function ResolveRequest(doaccept)
     )
     .done(function(data) {
         console.log("Request successful:", data);
-        AcceptFriend.style.display = "none";
-        DenyFriend.style.display = "none";
+        //AcceptFriend.style.display = "none";
+        //DenyFriend.style.display = "none";
+        location.reload();
         // Handle success response here
     })
     .fail(function(jqXHR, textStatus, errorThrown) {

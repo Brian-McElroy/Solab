@@ -8,6 +8,10 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { FXAAShader } from 'three/addons/shaders/FXAAShader.js';
+//import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+import { AddBorderLines } from "./CountryBorderLines.js";
+
 
 let debugtxt = document.getElementById("debugtxt");
 
@@ -30,6 +34,7 @@ container.addEventListener('touchstart', (e) => {
 //const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
 
 export const scene = new THREE.Scene();
+export const linescene = new THREE.Scene();
 
 export const width = container.clientWidth;
 export const height = container.clientHeight;
@@ -53,6 +58,7 @@ renderer.setSize(width, height);
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setClearColor( 0xffffff, 0);
 container.appendChild(renderer.domElement);
+renderer.autoClear = false;
 let model;
 let composer;
 
@@ -61,10 +67,13 @@ function animate()
 {
     //iconFollowPoint();
     UpdatePanZoom();
-    renderer.render(scene, camera);
+
+    //renderer.render(scene, camera);
     if(composer) composer.render();
     //requestAnimationFrame(iconFollowPoint);
     //model.rotation.y += 0.01;
+    renderer.clearDepth(); // important to allow new draws on top
+    renderer.render(linescene, camera);
 }
 renderer.setAnimationLoop(animate);
 
@@ -91,7 +100,7 @@ window.addEventListener('resize', onResize);
 //===========================================
 
 const loader = new GLTFLoader();
-loader.load( './world_map/Brian_Blender_1.glb', function ( gltf )
+loader.load( './world_map/Brian_WithBorders.glb', function ( gltf )
 {
     model = gltf.scene ;
 
@@ -105,11 +114,14 @@ loader.load( './world_map/Brian_Blender_1.glb', function ( gltf )
 
     scene.add(model );
     Outline(model);
+    AddBorderLines(model);
 
 }, undefined, function ( error ) {
 
 	console.error( error );
 } );
+
+
 
 
 //const light = new THREE.AmbientLight(new THREE.Color().setRGB( 1, 1, 1 ),4);
@@ -129,9 +141,9 @@ function Outline(model)
     // Initialize OutlinePass
     const outlinePass = new OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight), scene, camera);
     outlinePass.selectedObjects = [model];
-    outlinePass.edgeStrength = 3.0;
-    outlinePass.edgeGlow = 0.5;
-    outlinePass.edgeThickness = 1.0;
+    outlinePass.edgeStrength = 2.0;
+    outlinePass.edgeGlow = 1;
+    outlinePass.edgeThickness = 1;
     outlinePass.pulsePeriod = 0;
     outlinePass.renderToScreen = true;
     outlinePass.usePatternTexture = false;
@@ -139,11 +151,20 @@ function Outline(model)
     outlinePass.hiddenEdgeColor.set('#ffcc00'); 
 
     composer.addPass(outlinePass);
-
+    /*
+         // UnrealBloomPass setup
+         const bloomPass = new UnrealBloomPass(
+            new THREE.Vector2(window.innerWidth, window.innerHeight),
+            0.5,   // strength
+            0.5,   // radius
+            0.85   // threshold
+        );
+        composer.addPass(bloomPass);
+    */
     // Initialize FXAA Pass
     const fxaaPass = new ShaderPass(FXAAShader);
     fxaaPass.uniforms['resolution'].value.set(1 / window.innerWidth, 1 / window.innerHeight);
-    composer.addPass(fxaaPass);
+    //composer.addPass(fxaaPass);
 }
 
 

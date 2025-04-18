@@ -116,10 +116,11 @@ function CreateFakeArtist(maxartists)
 function CreateMarkers(data)
 {
     const node = document.getElementById("map");
+    let orig = node.firstElementChild;
 
     for (let i = 0; i < markersData.Artists.length; i++)
     {
-        let clone = node.firstElementChild.cloneNode(true);
+        let clone = orig.cloneNode(true);
         DOMmarkers.push(clone);
         clone.artistIndex = i;
         AddArtistImage(clone.firstElementChild,markersData.Artists[i]);
@@ -127,7 +128,7 @@ function CreateMarkers(data)
         node.appendChild(clone); 
     } 
 
-    node.firstElementChild.remove();
+    orig.style.display= "none";
     ColliderStart();
     OpenDirect();
 }

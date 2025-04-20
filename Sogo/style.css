@@ -4,6 +4,7 @@
   --sogo-red: #2E0000;
   --sogo-white: #CDCDCD;
   --sogo-redred: #ff0000;
+  --sogo-modal: #000000c0;
 }
 
 .condensed {
@@ -77,7 +78,6 @@ img
 button
 {
   text-align: center;
-  max-width:80%;
   touch-action: auto;
   transition: opacity 0.3s ease;
 
@@ -209,6 +209,8 @@ textarea
 
 #installApp
 {
+  display: flex;
+  flex-direction:row;
   position: absolute;
   top: 4vh;
   left: 50%;
@@ -300,22 +302,27 @@ textarea
 {
   position: absolute; 
   top: 0;
-  left: 100%;
+  right: 0vh;
   display: flex;
   flex-direction: column; 
-  align-items: center; 
   z-index: 200; 
-  background-color: rgb(54, 54, 54);
-  transform: translateX(-100%);
+  background-color: var(--sogo-modal);
   padding: 1vh 0vh;
-  padding-top: 6.5vh;
+  padding-top: 7.5vh;
 }
 
 .hamburgerLink
 {
+  display: block;
   min-width: 20vh;
-  font-size:2vh;
-  margin: 1vh 0vh;
+  font-size:2.6vh;
+  margin: 2vh 0.7vh;
+  font-weight: 100;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  border-radius: none;
+  box-shadow: none;
+  text-align: left;
 }
 
 /* Map markers
@@ -445,7 +452,7 @@ textarea
 }
 
 /* buttons */
-/*------------------------*/
+/*----------*/
 
 
 .DetailsButton

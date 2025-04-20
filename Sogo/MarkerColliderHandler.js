@@ -10,7 +10,7 @@ let priorityList =[];
 
 export function ColliderStart()
 {
-    GetMarkerDiameter();
+    //GetMarkerDiameter();
 
     let myname = localStorage.getItem(MyNameKey);
 
@@ -159,7 +159,7 @@ function GetItemWithThisIndex(index)
     }
 }
 
-function GetMarkerDiameter()
+export function GetMarkerDiameter()
 {   
     markerDiameter = document.getElementById("ArtistMarker").clientHeight;
     //console.log(document.getElementById("ArtistMarker").clientHeight);  

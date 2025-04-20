@@ -8,6 +8,7 @@ import { ArtistSelected} from "./LinesMan.js";
 import { UpdateLines} from "./LinesMan.js";
 import { DecideWhichToShow} from "./MarkerColliderHandler.js";
 import {ColliderStart} from "./MarkerColliderHandler.js";
+import {GetMarkerDiameter} from "./MarkerColliderHandler.js";
 import {ColliderArtistSelected} from "./MarkerColliderHandler.js";
 import {ColliderArtistDeSelected} from "./MarkerColliderHandler.js";
 import {GotoPoint} from "./panzoom.js";
@@ -341,6 +342,7 @@ SetInteraction(container);
 
 if( typeof MainMapPage !== 'undefined')
 {
+    GetMarkerDiameter();
     GetData();
     //CreateFakeData();
 

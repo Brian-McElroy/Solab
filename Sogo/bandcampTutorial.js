@@ -11,7 +11,7 @@ let helpstrings =
 [
     "1. If you're on mobile, navigate to the bottom of the page and press \"Desktop View\"",
     "2. Press \"Share / Embed\"",
-    "3. Press \"Embed this album\"",
+    "3. Press \"Embed this album\" or \"Embed this track\"",
     "4. Press any of these...",
     "5. Copy this code.",
 ]

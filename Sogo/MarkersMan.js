@@ -189,6 +189,8 @@ function OpenArtistDetails(index)
 {
     if(openArtistDetails !== null)
     {
+        if(index === openArtistDetails) return;
+
         DOMmarkers[openArtistDetails].classList.remove('show');
         details.classList.remove("doanimate");
         details.classList.add("hidedetails");

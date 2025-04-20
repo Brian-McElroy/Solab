@@ -187,7 +187,15 @@ function SetInteraction(div)
 
 function OpenArtistDetails(index)
 {
-    ShowHideDOMThing(details,true);
+    if(openArtistDetails !== null)
+    {
+        DOMmarkers[openArtistDetails].classList.remove('show');
+        details.classList.remove("doanimate");
+        details.classList.add("hidedetails");
+        details.offsetWidth;
+    }
+
+    //ShowHideDOMThing(details,true);
     DetailsName.innerHTML = markersData.Artists[index].name;
     SetGenres(index);
     openArtistDetails = index;
@@ -195,6 +203,10 @@ function OpenArtistDetails(index)
     ColliderArtistSelected(index);
     HandleFriendButtons(index);
     requestAnimationFrame(iconFollowPoint);
+
+    details.classList.add("doanimate");
+    details.classList.remove("hidedetails");
+
     ArtistSelected(markersData.Artists[index]);
 }
 
@@ -234,7 +246,8 @@ function CloseArtistDetails()
     if(openArtistDetails == null) return;
     
     DOMmarkers[openArtistDetails].classList.remove('show');
-    ShowHideDOMThing(details,false)
+    //ShowHideDOMThing(details,false)
+    details.classList.add("hidedetails");
     openArtistDetails = null;
     ColliderArtistDeSelected();
     NoOneSelected();

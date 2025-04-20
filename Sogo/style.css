@@ -3,6 +3,7 @@
 :root {
   --sogo-red: #2E0000;
   --sogo-white: #CDCDCD;
+  --sogo-redred: #ff0000;
 }
 
 .condensed {
@@ -89,6 +90,13 @@ button
   border-radius: 0.5vh;
   text-align: center;
   box-shadow: 0 0.8vh 1.2vh rgba(0, 0, 0, 0.7);
+
+  transition: filter 0.1s;
+}
+
+button:active
+{
+  filter: brightness(50%);
 }
 
 button:disabled
@@ -162,21 +170,21 @@ textarea
 
 #LinkToHereButton
 {
-  height: 6.5vh;
-  width:  6.5vh;
-  border-radius: 50%;
+  height: 4.5vh;
+  width:  4.5vh;
   position: absolute;
-  top: 0%;   
-  left: 0%;
+  top: 1vh;   
+  left: 1vh;
   background-color: gray;
   z-index: 200;
   
-  background-image: url("./Images/link.svg");
+  background-image: url("./Images/ShareButton.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   border: none;
-  background-color:#222222
+  background-color:#00000000;
+  box-shadow: none;
 }
 
 .ButtonImage
@@ -273,21 +281,18 @@ textarea
 
 #HamburgerButton
 {
-  height: 6.5vh;
-  width:  6.5vh;
-  border-radius: 50%;
+  height: 4.5vh;
+  width:  4.5vh;
   position: absolute;
-  top: 0%;   
-  left: 100%;
+  top: 1vh;   
+  right: 1vh;
   z-index: 300; 
-  transform: translateX(-100%);
-
   background-image: url("./Images/hamburger-menu.svg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   border: none;
-  background-color:#222222
+  background-color:#00000000
 }
 
 #HamburgerMenu
@@ -322,7 +327,7 @@ textarea
   width: 5vh;
   top: 100% ; 
   left: 100%; 
-  background-color: red;
+  background-color: var(--sogo-redred);
   transform: translate(-50%, -50%);
   border-radius: 50%;
 } 
@@ -378,13 +383,14 @@ textarea
 {
   user-select: none; 
   position: absolute;
+  display: inline-block;
   z-index: 100; 
-  height: 20vh;
-  width: 30vh;
-  top: 50%;   
-  left: 50%; 
-  background-color: grey;
-  /*transform: translate(-50%, -50%);*/
+  /*height: 20vh;*/
+  min-width: 30vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  transform: translate(6vh, -6vh);
+  /*border: 1px solid rgba(32, 151, 8, 1);*/
+  
 } 
 
 .artistInfoText
@@ -394,12 +400,88 @@ textarea
 
 #DetailsName
 {
-  font-size:2vh;
+  font-weight: 700;
+  font-size: 3vh;
+  text-align: left;
+  margin: 0vh 1vh;
+  margin-top: 1vh;
+}
+
+#genreslist
+{
+  margin: 0vh 1vh;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  display: flex;
+  flex-direction:row;
 }
 
 #DetailsGenres
 {
-  font-size:1.5vh;
+  font-stretch: condensed;
+  font-weight: 300;
+  background-color: var(--sogo-redred);
+  border: 1px solid var(--sogo-white);
+  font-size:1.7vh;
+  padding: 0.2vh 0.5vh;
+}
+
+/* buttons */
+/*------------------------*/
+
+
+.DetailsButton
+{
+  height: 3.2vh;
+  width:  3.2vh;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  background-color:#00000000;
+  margin: 0 1vh;
+  box-shadow: none;
+  filter: brightness(0.9);
+}
+
+#buttonslist
+{
+  margin: 0vh 1vh;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  display: flex;
+  flex-direction:row;
+}
+
+#PlayMusicButton
+{
+  background-image: url("./Images/PlayButton.png");
+}
+
+#DetailsBandCampLink
+{
+  background-image: url("./Images/Bandcamp_logo.png");
+  width:  7vh;
+}
+
+#DetailsHereLink
+{
+  background-image: url("./Images/ShareButton.png");
+}
+
+#FriendMe
+{
+  background-image: url("./Images/AddButton.png");
+}
+
+#AcceptFriend
+{
+  background-image: url("./Images/AddButton.png");
+}
+
+#DenyFriend
+{
+  background-image: url("./Images/AddButton.png");
 }
 
 #MusicPlayer

@@ -188,13 +188,30 @@ function OpenArtistDetails(index)
 {
     ShowHideDOMThing(details,true);
     DetailsName.innerHTML = markersData.Artists[index].name;
-    DetailsGenres.innerHTML = GenresToString(index);
+    SetGenres(index);
     openArtistDetails = index;
     DOMmarkers[index].classList.add('show');
     ColliderArtistSelected(index);
     HandleFriendButtons(index);
     requestAnimationFrame(iconFollowPoint);
     ArtistSelected(markersData.Artists[index]);
+}
+
+function SetGenres(index)
+{
+    for (let i = DetailsGenres.parentElement.children.length -1; i >0  ; i--)
+    {
+        DetailsGenres.parentElement.children[i].remove();               
+    }
+
+    DetailsGenres.style.display ="block";
+    for (let i = 0; i < markersData.Artists[index].genres.length; i++)
+    {
+        let clone = DetailsGenres.cloneNode(true);
+        clone.innerHTML = markersData.Genres[markersData.Artists[index].genres[i]];
+        DetailsGenres.parentElement.appendChild(clone);
+    }
+    DetailsGenres.style.display ="none";
 }
 
 function DetailsGotoBCClicked()
@@ -210,17 +227,6 @@ function DetailsHereLinkClicked()
     console.log("not done yet!! - Brian");
 }
 
-
-function GenresToString(index)
-{
-    let answer ="";
-    for (let i = 0; i < markersData.Artists[index].genres.length; i++)
-    {
-        if(i > 0) answer +=",";
-        answer += markersData.Genres[markersData.Artists[index].genres[i]];
-    }
-    return answer;    
-}
 
 function CloseArtistDetails()
 {

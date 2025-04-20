@@ -61,13 +61,15 @@
 		<div id="ArtistMarker" class="ArtistMarker"><img class="ArtistMarkerImage" src="./Images/user.jpg" ></div>
 		<div style="visibility: hidden; opacity: 0;" id="ArtistInfo">
 			<p class="artistInfoText" id="DetailsName">Name name name</p>
-			<p class="artistInfoText" id="DetailsGenres">Funk, Hip-hop, Harpsicord</p>
-			<button id="PlayMusicButton" type="button">></button> 
-			<button id="DetailsBandCampLink" type="button">bandcamp Link</button> 
-			<button id="DetailsHereLink" type="button">Here link</button> 
-			<button id="FriendMe" type="button"><3</button> 
-			<button id="AcceptFriend" type="button">yes</button> 
-			<button id="DenyFriend" type="button">no</button> 
+			<div id ="genreslist"><p class="artistInfoText" id="DetailsGenres">Funk</p></div>
+			<div id ="buttonslist">
+				<button id="PlayMusicButton" class="DetailsButton" type="button"></button> 
+				<button id="DetailsBandCampLink" class="DetailsButton" type="button"></button> 
+				<button id="DetailsHereLink" class="DetailsButton" type="button"></button> 
+				<button id="FriendMe" class="DetailsButton" type="button"></button> 
+				<button id="AcceptFriend" class="DetailsButton" type="button"></button> 
+				<button id="DenyFriend" class="DetailsButton" type="button"></button> 
+			</div>
 		</div>
 	</div>
 	<iframe style="display: none;" id="MusicPlayer" src="" seamless><a href=""></a></iframe>

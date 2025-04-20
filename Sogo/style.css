@@ -148,6 +148,28 @@ textarea
   text-align: left;
 }
 
+#setloctxt
+{
+  position: relative;
+  z-index: 2000; 
+}
+
+#welcomeTxt
+{
+  margin-top: 34vh;
+  background-color: black;
+  font-size:2.5vh;
+  padding: 4vh 4vh;
+}
+
+#sogologo
+{
+  position: absolute;
+  top: 4vh;
+  width: 25vh;
+  transform: translateX(-40%);
+}
+
 #trackInputField
 {
   max-width: 40vh;
@@ -177,10 +199,14 @@ textarea
 
 #CopyLinkButton
 {
+  max-width: 30vh;
+  width: 55%;
+  height: 8vh;
   position: absolute;
-  bottom: 14vh;
+  bottom: 35vh;
   left: 50%;
   transform: translateX(-50%);
+  border: 0.27vh solid var(--sogo-white);
 }
 
 #error
@@ -201,7 +227,11 @@ textarea
 
 #copiedmessage
 {
-  color: rgb(32, 151, 8);
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  bottom: 43vh;
+  color: var(--sogo-yellow)
 }
 
 #LinkToHereButton

@@ -1,10 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@100;300;400;500;700&display=swap');
+
+
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap');
 :root {
   --sogo-red: #2E0000;
-  --sogo-white: #CDCDCD;
+  --sogo-white: #eee4de;
   --sogo-redred: #ff0000;
   --sogo-modal: #000000c0;
+  --sogo-yellow: #f3c600;
 }
 
 .condensed {
@@ -37,7 +40,8 @@ html, body
    margin: 0;
    height: 100%;
    width: 100%;
-   font-size:3vh;
+   font-size:2.2vh;
+   font-weight:100;
    text-align: center;
    background-image: url("./Images/BGPattern.svg");
    background-size: 20vh;
@@ -53,6 +57,9 @@ input, textarea, select, button
   font-family: inherit; /* inherit from body or * */
 }
 
+a {
+  color: var(--sogo-yellow)
+}
 
 /*  PABLO... u can use this to make all buttons look like divs, so u can make ure own styles
 button
@@ -87,7 +94,6 @@ button
   background-color: black;
   color: var(--sogo-white);
   border: 0.1vh solid var(--sogo-white);
-  border-radius: 0.5vh;
   text-align: center;
   box-shadow: 0 0.8vh 1.2vh rgba(0, 0, 0, 0.7);
 
@@ -101,14 +107,14 @@ button:active
 
 button:disabled
 {
-  opacity: 0.7;
+  opacity: 0.3;
+  pointer-events: none;
   /*cursor: not-allowed;*/
 }
 
 input 
 {
   width: 80%;
-  font-size: 2vh;
   text-align: center;
   outline-style: solid;
 }
@@ -123,11 +129,6 @@ textarea
   cursor: text;
   touch-action: auto;
   pointer-events: auto;
-  height: 30%;
-  width: 85%;
-  font-size: 2vh;
-  text-align: center;
-  outline-style: solid;
 }
 
 #flexcontainer
@@ -136,13 +137,42 @@ textarea
   flex-direction: column;
 }
 
+.sogotextbox
+{
+  max-width: 40vh;
+  margin: auto;
+  width: 70%;
+  margin-top: 12vh;
+  background-color: var(--sogo-red);
+  padding: 3vh 4vh;
+  text-align: left;
+}
+
+#trackInputField
+{
+  max-width: 40vh;
+  margin: auto;
+  width: 70%;
+  height: 20vh;
+  font-size: 2vh;
+  margin-top: 7vh;
+  padding: 1vh 4vh;
+  background-color: black;
+  color: var(--sogo-white);
+  border: 0.2vh solid var(--sogo-white);
+}
+
 #OkButton
 {
+  max-width: 30vh;
+  width: 55%;
+  height: 8vh;
   position: absolute;
-  bottom: 4vh;
+  bottom: 7vh;
   left: 50%;
   transform: translateX(-50%);
   text-transform: uppercase;
+  border: 0.27vh solid var(--sogo-white);
 }
 
 #CopyLinkButton
@@ -155,12 +185,18 @@ textarea
 
 #error
 {
-  color: red;
+  width: 78%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 18vh;
+  color: var(--sogo-yellow);
+  font-style: italic;
 }
 
 .selectedgenreButton
 {
-  color: yellow;
+  color: var(--sogo-yellow);
 }
 
 #copiedmessage
@@ -443,7 +479,6 @@ textarea
 
 #DetailsGenres
 {
-  font-stretch: condensed;
   font-weight: 300;
   background-color: var(--sogo-redred);
   border: 1px solid var(--sogo-white);

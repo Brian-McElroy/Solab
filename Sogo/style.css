@@ -292,7 +292,8 @@ textarea
   background-repeat: no-repeat;
   background-position: center;
   border: none;
-  background-color:#00000000
+  background-color:#00000000;
+  box-shadow: none;
 }
 
 #HamburgerMenu
@@ -401,7 +402,7 @@ textarea
 
 .doanimate
 {
-  transition: max-width 0.2s ease;
+  transition: max-width 0.23s linear;
 }
 
 .hidedetails
@@ -459,6 +460,7 @@ textarea
   margin: 0 1vh;
   box-shadow: none;
   filter: brightness(0.9);
+  flex-shrink: 0;
 }
 
 #buttonslist
@@ -468,6 +470,7 @@ textarea
   margin-bottom: 1vh;
   display: flex;
   flex-direction:row;
+  flex-shrink: 0;
 }
 
 #PlayMusicButton
